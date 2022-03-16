@@ -1,4 +1,4 @@
-# 50001-InfoSys1D
+# 50001-InfoSys1D - FEAST App
 source folder for Java App, Firebase DB and openCV resources
 
 ## Contributors
