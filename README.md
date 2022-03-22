@@ -7,6 +7,7 @@ source folder for Java App, Firebase DB and openCV resources
  - [Lim Fuo En](https://github.com/Fe-56)
  - [Pala Tej Deep](https://github.com/Tej-Deep)
  - [Tan Lay Lin](https://github.com/Lay-Lin)
+ - [Javier Teo] (https://github.com/javiertzr01)
 
 ## Introduction
 to be filled
