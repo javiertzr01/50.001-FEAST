@@ -2,15 +2,23 @@
 source folder for Java App, Firebase DB and openCV resources
 
 ## Contributors
- - [Michael Chun](https://github.com/mckp0)
- - [Christopher Wah](https://github.com/skerbos)
- - [Lim Fuo En](https://github.com/Fe-56)
- - [Pala Tej Deep](https://github.com/Tej-Deep)
- - [Tan Lay Lin](https://github.com/Lay-Lin)
- - [Javier Teo] (https://github.com/javiertzr01)
+ - [Michael Chun](https://github.com/mckp0) [Project Manager]
+ - [Lim Fuo En](https://github.com/Fe-56) [Front End] 
+ - [Tan Lay Lin](https://github.com/Lay-Lin) [Front End]
+ - [Christopher Wah](https://github.com/skerbos) [Back End]
+ - [Pala Tej Deep](https://github.com/Tej-Deep) [Back End]
+ - [Javier Teo](https://github.com/javiertzr01) [Back End]
 
-## Introduction
-to be filled
+## Problem Statement
+With large crowds and limited capacity being inconvenient for diners, how can we design an app to seamlessly allow diners to make informed decisions on where and when to eat?
+
+## Solution
+Introducing FEAST, Food Establishment Autonomous Spatial Tracking, a real-time crowd tracking app. Features F&B establishments in SUTD with up to date information on opening/closing times as well as daily specials, current crowd levels as well as historic crowd data levels.
 
 ## Resources
-to be filled
+openCV Python implementation 
+    - https://github.com/saimj7/People-Counting-in-Real-Time
+    - https://www.pyimagesearch.com/2018/08/13/opencv-people-counter/
+
+Firebase Database
+    - https://firebase.google.com/docs/database
