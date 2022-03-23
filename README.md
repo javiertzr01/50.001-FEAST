@@ -17,8 +17,8 @@ Introducing FEAST, Food Establishment Autonomous Spatial Tracking, a real-time c
 
 ## Resources
 openCV Python implementation 
-    - https://github.com/saimj7/People-Counting-in-Real-Time
-    - https://www.pyimagesearch.com/2018/08/13/opencv-people-counter/
+- https://github.com/saimj7/People-Counting-in-Real-Time
+- https://www.pyimagesearch.com/2018/08/13/opencv-people-counter/
 
 Firebase Database
-    - https://firebase.google.com/docs/database
+- https://firebase.google.com/docs/database
