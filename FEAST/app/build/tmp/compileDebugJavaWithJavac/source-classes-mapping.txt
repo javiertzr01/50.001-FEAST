@@ -1,0 +1,5 @@
+com/example/feast/BuildConfig.java
+ com.example.feast.BuildConfig
+com/example/feast/MainActivity.java
+ com.example.feast.MainActivity
+ com.example.feast.MainActivity$1
