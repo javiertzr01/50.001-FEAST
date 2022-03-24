@@ -4,7 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 
-public class CrowdLevel extends FNBEstablisment{
+public class CrowdLevel extends FNBEstablishment{
 
     static final String[] crowdLevelsString = {"Not Crowded", "A Little Crowded", "Somewhat Crowded", "Very Crowded", "Full"};
     static final Double[] crowdLevelsDouble = {0.2, 0.5, 0.8, 1.0};
