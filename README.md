@@ -5,6 +5,7 @@ source folder for Java App, Firebase DB and openCV resources
  - [Michael Chun](https://github.com/mckp0) [Project Manager]
  - [Lim Fuo En](https://github.com/Fe-56) [Front End] 
  - [Tan Lay Lin](https://github.com/Lay-Lin) [Front End]
+ - [Kenny Ong Ker Chin](https://github.com/cannotknee) [Front End]
  - [Christopher Wah](https://github.com/skerbos) [Back End]
  - [Pala Tej Deep](https://github.com/Tej-Deep) [Back End]
  - [Javier Teo](https://github.com/javiertzr01) [Back End]
