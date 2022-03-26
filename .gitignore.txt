@@ -1,0 +1,11 @@
+FEAST/.gradle/7.0.2/fileHashes/fileHashes.bin
+FEAST/.gradle/7.0.2/fileHashes/fileHashes.lock
+FEAST/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+FEAST/.gradle/buildOutputCleanup/outputFiles.bin
+FEAST/.gradle/checksums/checksums.lock
+FEAST/.gradle/checksums/md5-checksums.bin
+FEAST/.gradle/checksums/sha1-checksums.bin
+FEAST/.idea/gradle.xml
+FEAST/.idea/misc.xml
+FEAST/.idea/workspace.xml
+FEAST/local.properties
