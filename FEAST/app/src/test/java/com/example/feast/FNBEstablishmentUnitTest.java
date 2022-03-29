@@ -11,7 +11,7 @@ import java.time.DayOfWeek;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class FNBEstablishmentUnitTest {
     @Test
     public void FNBEstablishmentDefaultCheck(){
         FNBEstablishment default_ = new FNBEstablishment();
@@ -19,9 +19,10 @@ public class ExampleUnitTest {
     }
     @Test
     public void CreateFNBEstablishmentCheck(){
-        FNBEstablishment creation = new FNBEstablishment(10, "creation", "00:00:00", "23:59:59", "24/7");
+        FNBEstablishment creation = new FNBEstablishment(10, false, "creation", "00:00:00", "23:59:59", "24/7");
         System.out.println(creation.openHour);
         assertEquals(10, creation.maxCapacity);
+        assertEquals(false, creation.isFavorite);
         assertEquals("creation", creation.name);
         assertEquals("00", creation.openHour);
         assertEquals("00", creation.openMin);

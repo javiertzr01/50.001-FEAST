@@ -7,8 +7,9 @@ import androidx.annotation.RequiresApi;
 import java.time.*;
 import java.util.HashMap;
 
-public class FNBEstablishment {
+public class FNBEstablishment implements Comparable<FNBEstablishment>{
     int maxCapacity;
+    boolean isFavorite;
     String name;
     String openHour;
     String closeHour;
@@ -23,6 +24,7 @@ public class FNBEstablishment {
     FNBEstablishment()
     {
         maxCapacity = 1;
+        isFavorite = false;
         name = "defaultFNB";
         openHour = "08";
         openMin = "00";
@@ -37,9 +39,10 @@ public class FNBEstablishment {
 
     }
 
-    FNBEstablishment(int maxCapacity, String name, String openingHour, String closingHour, String description) //openingHour and closingHour must be in "hh:mm" format
+    FNBEstablishment(int maxCapacity, boolean isFavorite, String name, String openingHour, String closingHour, String description) //openingHour and closingHour must be in "hh:mm" format
     {
         this.maxCapacity = maxCapacity;
+        this.isFavorite = isFavorite;
         this.name = name;
         this.description = description;
         for (DayOfWeek d: DayOfWeek.values()){      //From Sunday to Saturday
@@ -62,6 +65,14 @@ public class FNBEstablishment {
         this.closeMin = String.valueOf(closeMinCharArray);
         this.closeSec = String.valueOf(closeSecCharArray);
     }
+
+    public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }
+
+    public int getMaxCapacity() { return this.maxCapacity; }
+
+    public void setIsFavorite(boolean isFavorite) { this.isFavorite = isFavorite; }
+
+    public boolean getIsFavorite() { return this.isFavorite; }
 
     public void setOpeningClosingTime(String newOpeningHour, String newClosingHour)     //must be in "hh:mm" format
     {
@@ -152,4 +163,21 @@ public class FNBEstablishment {
 //Future Improvements: (If we not lazy)
 // does not account for specific dates closed
 // does not account for different closing times on different days
+
+    @Override
+    public int compareTo(FNBEstablishment otherFNBEstablishment)
+    {
+        if (this.isFavorite == otherFNBEstablishment.isFavorite)
+        {
+            return this.name.compareTo(otherFNBEstablishment.name);
+        }
+        else if (this.isFavorite)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
 }
