@@ -63,7 +63,7 @@ public class FNBEstablishmentUnitTest {
         default_.setOpeningClosingTime("00:00:00", "23:59:59");
         default_.setDaysOpen("weekend");
 
-        assertEquals("Open", default_.isOpen());
+        assertEquals("Close", default_.isOpen());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class FNBEstablishmentUnitTest {
         default_.setOpeningClosingTime("00:00:00", "23:59:59");
         default_.setDaysOpen("weekday");
 
-        assertEquals("Close", default_.isOpen());
+        assertEquals("Open", default_.isOpen());
     }
 
     @Test
