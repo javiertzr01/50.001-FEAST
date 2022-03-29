@@ -10,7 +10,24 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="Canteen" />
+        android:text="@string/test_fnbEstablishmentName" />
+
+    <ImageView
+        android:id="@+id/waitingTimePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:src="@drawable/waiting_time"
+        android:contentDescription="An icon of a clock depicting the waiting time" />
+
+    <TextView
+        android:id="@+id/dotText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/dotText" />
 
     <TextView
         android:id="@+id/waitingTime"
@@ -18,7 +35,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="30 - 40 min" />
+        android:text="@string/test_waitingTime" />
 
     <TextView
         android:id="@+id/capacity"
@@ -26,7 +43,15 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="Full 100%" />
+        android:text="@string/test_capacity" />
+
+    <TextView
+        android:id="@+id/openingHoursText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/openingHoursText" />
 
     <TextView
         android:id="@+id/openingHours"
@@ -34,7 +59,24 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="8am - 7:30pm" />
+        android:text="@string/test_openingHours" />
+
+    <ImageView
+        android:id="@+id/historicalTrendPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:src="@drawable/historical_trends"
+        android:contentDescription="An icon depicting a timeline" />
+
+    <TextView
+        android:id="@+id/historyText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/historyText" />
 
     <ImageView
         android:id="@+id/fnbPhoto"
@@ -42,7 +84,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center"
-        android:src="@drawable/historical_trends"
+        android:src="@drawable/test_sutd_canteen"
         android:contentDescription="A photo of the FnB Establishment" />
 
 </LinearLayout>

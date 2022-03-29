@@ -19,15 +19,31 @@ public class FNBButton extends LinearLayout {
         super(context);
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fnb_button, null); // custom layout.xml file for the FNBButton
         this.fnbEstablishmentName = view.findViewById(R.id.fnbEstablishmentName);
-        this.waitingTime = view.findViewById(R.id.waitingTime); // pull the estimated waiting time at the F&B establishment from the database; currently a placeholder test value
-        this.capacity = view.findViewById(R.id.capacity); // pull the current capacity of the F&B establishment from the database; currently a placeholder test value
-        this.openingHours = view.findViewById(R.id.openingHours); // pull the current opening hours of the F&B establishment from the database; currently a placeholder test value
-        this.fnbPhoto = view.findViewById(R.id.fnbPhoto); // the historical trends png icon
+        this.waitingTime = view.findViewById(R.id.waitingTime);
+        this.capacity = view.findViewById(R.id.capacity);
+        this.openingHours = view.findViewById(R.id.openingHours);
+        this.fnbPhoto = view.findViewById(R.id.fnbPhoto);
         this.addView(view);
     }
 
     // TODO
     public void setFNBEstablishmentName(String value){
         this.fnbEstablishmentName.setText(R.string.test_fnbEstablishmentName); // pull the F&B establishment name from the database; currently a placeholder test value
+    }
+
+    public void setWaitingTime(String value){
+        this.waitingTime.setText(R.string.test_waitingTime); // pull the estimated waiting time at the F&B establishment from the database; currently a placeholder test value
+    }
+
+    public void setCapacity(String value) {
+        this.capacity.setText(R.string.test_capacity); // pull the current capacity of the F&B establishment from the database; currently a placeholder test value
+    }
+
+    public void setOpeningHours(String value){
+        this.openingHours.setText(R.string.test_openingHours); // pull the current opening hours of the F&B establishment from the database; currently a placeholder test value
+    }
+
+    public void setFNBPhoto(String value){
+        this.fnbPhoto.setImageResource(R.drawable.test_sutd_canteen); // pull the photo of the F&B establishment from the database; currently a placeholder test image
     }
 }
