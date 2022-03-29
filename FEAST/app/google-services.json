@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1076444693488:android:645417d29ba30cc9c0d335",
         "android_client_info": {
-          "package_name": "com.example.feastbackend"
+          "package_name": "com.example.feast"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "1076444693488-23rfsosi4v1eus5c9j7lktcjddbqkddp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.feastbackend",
+            "package_name": "com.example.feast",
             "certificate_hash": "5588207a8b240a758484e48bd92d0e655eb574d9"
           }
         },
