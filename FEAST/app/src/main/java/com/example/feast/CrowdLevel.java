@@ -13,6 +13,7 @@ import java.util.HashMap;
 public class CrowdLevel extends FNBEstablishment{
 
     static final String[] crowdLevelsString = {"Not Crowded", "A Little Crowded", "Somewhat Crowded", "Very Crowded", "Full"};
+    static final Integer[] crowdLevelsInteger = {0, 1, 2 ,3, 4};
     static final Double[] crowdLevelsThresholdDouble = {0.2, 0.5, 0.8, 1.0};
 
     int currentCapacity;
@@ -63,7 +64,7 @@ public class CrowdLevel extends FNBEstablishment{
         }
     }
 
-    public String getCurrentCrowdLevel()
+    public String getCurrentCrowdLevelString()
     {
         if (this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[0])
         {
@@ -87,4 +88,27 @@ public class CrowdLevel extends FNBEstablishment{
         }
     }
 
+    public Integer getCurrentCrowdLevelInteger()
+    {
+        if (this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[0])
+        {
+            return crowdLevelsInteger[0];
+        }
+        else if (this.calculateCrowdPercentage() > crowdLevelsThresholdDouble[0] && this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[1])
+        {
+            return crowdLevelsInteger[1];
+        }
+        else if (this.calculateCrowdPercentage() > crowdLevelsThresholdDouble[1] && this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[2])
+        {
+            return crowdLevelsInteger[2];
+        }
+        else if (this.calculateCrowdPercentage() > crowdLevelsThresholdDouble[2] && this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[3])
+        {
+            return crowdLevelsInteger[3];
+        }
+        else
+        {
+            return crowdLevelsInteger[4];
+        }
+    }
 }

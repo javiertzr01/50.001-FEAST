@@ -7,7 +7,7 @@ import androidx.annotation.RequiresApi;
 import java.time.*;
 import java.util.HashMap;
 
-public class FNBEstablishment implements Comparable<FNBEstablishment>{
+public class FNBEstablishment{
     int maxCapacity;
     boolean isFavorite;
     String name;
@@ -163,21 +163,4 @@ public class FNBEstablishment implements Comparable<FNBEstablishment>{
 //Future Improvements: (If we not lazy)
 // does not account for specific dates closed
 // does not account for different closing times on different days
-
-    @Override
-    public int compareTo(FNBEstablishment otherFNBEstablishment)
-    {
-        if (this.isFavorite == otherFNBEstablishment.isFavorite)
-        {
-            return this.name.compareTo(otherFNBEstablishment.name);
-        }
-        else if (this.isFavorite)
-        {
-            return 1;
-        }
-        else
-        {
-            return -1;
-        }
-    }
 }
