@@ -1,7 +1,9 @@
 package com.example.feast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -17,24 +19,215 @@ public class HomePage extends AppCompatActivity {
 
         linearlayout = findViewById(R.id.homePageLayout); // initialises the LinearLayout into linearlayout
 
-        // to display all the F&B establishments
-        // need to iterate through all the current F&B establishments in the database or something, better not to simply hardcode it I guess
-//        for (int i = 0; i <= 3; i++){
-//            TextView textview = new TextView(this);
-//            textview.setText("TextView " + String.valueOf(i));
-//            textview.setClickable(true); // sets the TextView widget as clickable
-//            textview.setOnClickListener(new View.OnClickListener() {
-//               @Override
-//               public void onClick(View view){
-//
-//               }
-//            });
-//            linearlayout.addView(textview); // add the TextView to the LinearLayout
+        int n = 5;
 
-        // TODO
-            for (int i = 0; i <= 3; i++){
-                FNBButton fnbButton = new FNBButton(this);
-                linearlayout.addView(fnbButton);
+        for (int i = 0; i <= n; i++){
+            if (i == 0){
+                TextView firstEmptySpace = new TextView(this); // for the empty space above the first FNB Button
+                firstEmptySpace.setTextSize(2);
+                linearlayout.addView(firstEmptySpace);
+            }
+
+            FNBButton fnbButton = new FNBButton(this);
+            TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
+
+            if (i == 1){
+                fnbButton.setFNBEstablishmentName("D'Star Bistro");
+                fnbButton.setOpeningHours("10am to 10pm");
+            }
+
+            if (i == 3){
+                fnbButton.setFNBEstablishmentName("GomGom");
+                fnbButton.setCapacity("200%");
+            }
+
+            emptySpace.setTextSize(5);
+            linearlayout.addView(fnbButton);
+            linearlayout.addView(emptySpace);
+
+            if (i == n){
+                TextView lastEmptySpace = new TextView(this); // for the empty space below the last FNB Button
+                lastEmptySpace.setTextSize(2);
+                linearlayout.addView(lastEmptySpace);
+            }
         }
     }
+
+    // a bunch of helper methods below
+
+    // TODO
+    // helper method to go to OthersInfoPage upon clicking the FNBButton
+    public void setGoToOthersInfoPage(FNBButton fnbButton){
+        fnbButton.getFnbEstablishmentName().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToOthersInfoPage(view);
+            }
+        });
+
+        fnbButton.getWaitingTime().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToOthersInfoPage(view);
+            }
+        });
+
+        fnbButton.getCapacity().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToOthersInfoPage(view);
+            }
+        });
+
+        fnbButton.getOpeningHours().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToOthersInfoPage(view);
+            }
+        });
+
+        fnbButton.getFnbPhoto().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToOthersInfoPage(view);
+            }
+        });
+
+        fnbButton.getDotText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToOthersInfoPage(view);
+            }
+        });
+
+        fnbButton.getOpeningHoursText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToOthersInfoPage(view);
+            }
+        });
+
+        fnbButton.getHistoricalTrendPhoto().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO
+                //goToHistoricTrendsPage(view);
+            }
+        });
+
+        fnbButton.getHistoryText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO
+                //goToHistoricTrendsPage(view);
+            }
+        });
+
+        fnbButton.getWaitingTimePhoto().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToOthersInfoPage(view);
+            }
+        });
+
+        fnbButton.getFnbButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToOthersInfoPage(view);
+            }
+        });
+    }
+
+    // TODO
+//    public void goToOthersInfoPage(View view){
+//        Intent intent = new Intent(HomePage.this, OthersInfoPage.class);
+//        startActivity(intent);
+
+    // TODO
+    // helper method to go to CanteenPage upon clicking the FNBButton
+    public void setGoToCanteenPage(FNBButton fnbButton){
+        fnbButton.getFnbEstablishmentName().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToCanteenPage(view);
+            }
+        });
+
+        fnbButton.getWaitingTime().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToCanteenPage(view);
+            }
+        });
+
+        fnbButton.getCapacity().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToCanteenPage(view);
+            }
+        });
+
+        fnbButton.getOpeningHours().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToCanteenPage(view);
+            }
+        });
+
+        fnbButton.getFnbPhoto().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToCanteenPage(view);
+            }
+        });
+
+        fnbButton.getDotText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToCanteenPage(view);
+            }
+        });
+
+        fnbButton.getOpeningHoursText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToCanteenPage(view);
+            }
+        });
+
+        fnbButton.getHistoricalTrendPhoto().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO
+                //goToHistoricTrendsPage(view);
+            }
+        });
+
+        fnbButton.getHistoryText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO
+                //goToHistoricTrendsPage(view);
+            }
+        });
+
+        fnbButton.getWaitingTimePhoto().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToCanteenPage(view);
+            }
+        });
+
+        fnbButton.getFnbButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                goToCanteenPage(view);
+            }
+        });
+    }
+
+    // TODO
+//    public void goToCanteenPage(View view){
+//        Intent intent = new Intent(HomePage.this, CanteenPage.class);
+//        startActivity(intent);
 }
