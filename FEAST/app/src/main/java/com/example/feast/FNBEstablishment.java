@@ -130,10 +130,6 @@ public class FNBEstablishment implements Comparable<FNBEstablishment>{
     @RequiresApi(api = Build.VERSION_CODES.O)       //Make sure version is high enough (Oreo/Android 8.0)
     public String isOpen()
     {
-        //TODO @Javier Implement a system using java.time to check if the F&B est
-        // is open (get current time & day, then  consider the opening hours,
-        // closing hours, and day i.e. make sure its not saturday/sunday
-
         //Getting Local Date
         LocalDate localDate = LocalDate.now();
 

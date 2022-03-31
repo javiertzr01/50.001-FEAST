@@ -6,11 +6,6 @@ import static org.junit.Assert.*;
 
 import java.time.DayOfWeek;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 public class FNBEstablishmentUnitTest {
     @Test
     public void FNBEstablishmentDefaultCheck(){
@@ -72,7 +67,7 @@ public class FNBEstablishmentUnitTest {
         default_.setOpeningClosingTime("00:00:00", "23:59:59");
         default_.setDaysOpen("weekday");
 
-        assertEquals("Open", default_.isOpen());
+        assertEquals("Open", default_.isOpen()); //Manually set Open/Close value based on current time
     }
 
     @Test
@@ -81,6 +76,6 @@ public class FNBEstablishmentUnitTest {
         default_.setOpeningClosingTime("14:00:00", "14:01:00");
         default_.setDaysOpen("weekend");
 
-        assertEquals("Close", default_.isOpen());
+        assertEquals("Close", default_.isOpen()); //Manually set Open/Close value based on current time
     }
 }
