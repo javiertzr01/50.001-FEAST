@@ -39,6 +39,7 @@ public class FNBEstablishment{
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     FNBEstablishment(int maxCapacity, boolean isFavorite, String name, String openingHour, String closingHour, String description) //openingHour and closingHour must be in "hh:mm" format
     {
         this.maxCapacity = maxCapacity;

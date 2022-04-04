@@ -1,14 +1,24 @@
 package com.example.feast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class HomePage extends AppCompatActivity {
     LinearLayout linearlayout; // declaration of the LinearLayout of activity_home_page.xml
 
@@ -51,6 +61,36 @@ public class HomePage extends AppCompatActivity {
                 linearlayout.addView(lastEmptySpace);
             }
         }
+
+        /* Testing for CrowdLevel and WeeklyTracker
+           Attributes of Crowdlevel and WeeklyTracker must be set before they can be get
+           Attributes also can only be set in onDataChange as values are retrieved from Firebase
+
+        WeeklyTracker canteenTracker = new WeeklyTracker();
+        CrowdLevel canteenCrowd = new CrowdLevel();
+        FNBEstablishment canteen = new FNBEstablishment(10, false, "Canteen", "00:00:00", "23:59:59", "place");
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
+        db.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                canteenTracker.setWeeklyTrackerTable(snapshot, canteen);
+                System.out.println(canteenTracker.getWeeklyTrackerTable());
+                canteenCrowd.setCurrentCapacity(snapshot, canteen);
+                System.out.println(canteenCrowd.getCurrentCapacity());
+                canteenCrowd.setCrowdPercentage(canteen);
+                System.out.println(canteenCrowd.getCrowdPercentage());
+                System.out.println(canteen.maxCapacity);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+
+
     }
 
     // a bunch of helper methods below
