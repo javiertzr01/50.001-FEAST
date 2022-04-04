@@ -12,14 +12,13 @@ import java.util.HashMap;
 
 public class CrowdLevel extends FNBEstablishment{
 
-    static final String[] crowdLevelsString = {"Not Crowded", "A Little Crowded", "Somewhat Crowded", "Very Crowded", "Full"};
-    static final Integer[] crowdLevelsInteger = {0, 1, 2 ,3, 4};
-    static final Double[] crowdLevelsThresholdDouble = {0.2, 0.5, 0.8, 1.0};
+    static final String[] crowdLevelsString = {"Not Crowded", "Crowded", "Very Crowded", "Full"};
+    static final Integer[] crowdLevelsInteger = {0, 1, 2 ,3};
+    static final Double[] crowdLevelsThresholdDouble = {0.4, 0.7, 1.0};
 
-    int currentCapacity;
+    double currentCapacity;
     double crowdPercentage;
     String currentCrowdLevel;
-    HashMap<Integer, Integer> hourlyHighestCapacity;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     CrowdLevel()
@@ -27,88 +26,66 @@ public class CrowdLevel extends FNBEstablishment{
         this.currentCapacity = 1;
         this.crowdPercentage = 1;
         this.currentCrowdLevel = "Not Crowded";
-        this.hourlyHighestCapacity = new HashMap<>();
-        {
-            hourlyHighestCapacity.put(LocalTime.now().getHour(), this.currentCapacity);
-        }
     }
 
     public double getCurrentCapacity()
     {
         return this.currentCapacity;
     }
-
-    public HashMap<Integer, Integer> getHourlyHighestCapacity()
-    {
-        return this.hourlyHighestCapacity;
-    }
-
-    public double calculateCrowdPercentage()
-    {
-        this.crowdPercentage = this.currentCapacity/this.maxCapacity;
-        return this.crowdPercentage;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void refreshInfo(DataSnapshot ds)
+    public void setCurrentCapacity(DataSnapshot ds, FNBEstablishment fnb)
     {
         //Get value of current capacity of store from database
-        this.currentCapacity = ds.child("people_count").child(super.name).child("currentCapacity").getValue(Integer.class);
-        //Get value of hourly highest capacity of store from database
-        if (hourlyHighestCapacity.containsKey(LocalTime.now().getHour()))
-        {
-            if (hourlyHighestCapacity.get(LocalTime.now().getHour()) < this.currentCapacity)
-            {
-                hourlyHighestCapacity.put(LocalTime.now().getHour(), this.currentCapacity);
-            }
-        }
+        this.currentCapacity = ds.child(fnb.name).child("currentCapacity").getValue(Integer.class);
+    }
+
+
+    public void setCrowdPercentage(FNBEstablishment fnb)
+    {
+        this.crowdPercentage = this.currentCapacity/ fnb.maxCapacity;
+    }
+
+    public double getCrowdPercentage()
+    {
+        return this.crowdPercentage;
     }
 
     public String getCurrentCrowdLevelString()
     {
-        if (this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[0])
+        if (this.getCrowdPercentage() <= crowdLevelsThresholdDouble[0])
         {
             return crowdLevelsString[0];
         }
-        else if (this.calculateCrowdPercentage() > crowdLevelsThresholdDouble[0] && this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[1])
+        else if (this.getCrowdPercentage() > crowdLevelsThresholdDouble[0] && this.getCrowdPercentage() <= crowdLevelsThresholdDouble[1])
         {
             return crowdLevelsString[1];
         }
-        else if (this.calculateCrowdPercentage() > crowdLevelsThresholdDouble[1] && this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[2])
+        else if (this.getCrowdPercentage() > crowdLevelsThresholdDouble[1] && this.getCrowdPercentage() <= crowdLevelsThresholdDouble[2])
         {
             return crowdLevelsString[2];
         }
-        else if (this.calculateCrowdPercentage() > crowdLevelsThresholdDouble[2] && this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[3])
-        {
-            return crowdLevelsString[3];
-        }
         else
         {
-            return crowdLevelsString[4];
+            return crowdLevelsString[3];
         }
     }
 
     public Integer getCurrentCrowdLevelInteger()
     {
-        if (this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[0])
+        if (this.getCrowdPercentage() <= crowdLevelsThresholdDouble[0])
         {
             return crowdLevelsInteger[0];
         }
-        else if (this.calculateCrowdPercentage() > crowdLevelsThresholdDouble[0] && this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[1])
+        else if (this.getCrowdPercentage() > crowdLevelsThresholdDouble[0] && this.getCrowdPercentage() <= crowdLevelsThresholdDouble[1])
         {
             return crowdLevelsInteger[1];
         }
-        else if (this.calculateCrowdPercentage() > crowdLevelsThresholdDouble[1] && this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[2])
+        else if (this.getCrowdPercentage() > crowdLevelsThresholdDouble[1] && this.getCrowdPercentage() <= crowdLevelsThresholdDouble[2])
         {
             return crowdLevelsInteger[2];
         }
-        else if (this.calculateCrowdPercentage() > crowdLevelsThresholdDouble[2] && this.calculateCrowdPercentage() <= crowdLevelsThresholdDouble[3])
-        {
-            return crowdLevelsInteger[3];
-        }
         else
         {
-            return crowdLevelsInteger[4];
+            return crowdLevelsInteger[3];
         }
     }
 }
