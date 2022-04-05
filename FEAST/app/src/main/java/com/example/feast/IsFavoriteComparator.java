@@ -2,7 +2,7 @@ package com.example.feast;
 
 import java.util.Comparator;
 
-public class FNBComparator implements Comparator<FNBEstablishment> {
+public class IsFavoriteComparator implements Comparator<FNBEstablishment> {
 
     public int compare(FNBEstablishment fnb1, FNBEstablishment fnb2)
     {

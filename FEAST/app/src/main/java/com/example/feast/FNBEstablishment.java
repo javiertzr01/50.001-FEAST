@@ -19,6 +19,8 @@ public class FNBEstablishment{
     String closeSec;
     String description;
     HashMap<DayOfWeek, Boolean> daysOpen = new HashMap<>();
+    CrowdLevel crowdLevel;
+    WeeklyTracker weeklyTracker;
 
     @RequiresApi(api = Build.VERSION_CODES.O)       //Make sure version is high enough (Oreo/Android 8.0)
     FNBEstablishment()
@@ -36,6 +38,8 @@ public class FNBEstablishment{
         for (DayOfWeek d: DayOfWeek.values()){      //From Sunday to Saturday
             daysOpen.put(d, false);
         }
+        crowdLevel = new CrowdLevel();
+        weeklyTracker = new WeeklyTracker();
 
     }
 
@@ -49,6 +53,8 @@ public class FNBEstablishment{
         for (DayOfWeek d: DayOfWeek.values()){      //From Sunday to Saturday
             daysOpen.put(d, false);
         }
+        this.crowdLevel = new CrowdLevel();
+        this.weeklyTracker = new WeeklyTracker();
 
         char[] openingHourCharArray = openingHour.toCharArray();
         char[] openHourCharArray = {openingHourCharArray[0], openingHourCharArray[1]};
