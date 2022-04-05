@@ -84,11 +84,29 @@ def run():
 	# start the frames per second throughput estimator
 	fps = FPS().start()
 
+
 	if config.Thread:
 		vs = thread.ThreadingClass(config.url)
 
+	#keeping track of hourlymax
+	current = 0
+	hourly_max = 0
+
+	# initialising week day 
+	weekday = ['Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun']
+
+	# datetime
+	past = datetime.datetime.now()
+
 	# loop over frames from the video stream
 	while True:
+		# getting datetime
+		now = datetime.datetime.now()
+
+		if(now.hour != past.hour):
+			hourly_max = 0
+
+		past = now
 		# grab the next frame and handle if we are reading from either
 		# VideoCapture or VideoStream
 		frame = vs.read()
@@ -277,8 +295,15 @@ def run():
 		info2 = [
 		("Total people inside", x),
 		]
-		if db.child("people_count") != x[-1]:
-			db.child("people_count").value = x[-1]
+		if(x[-1] != current):
+			current = x[-1]
+			db.child("people_count").child('canteen').child('current').set(current)
+					
+		if(current > hourly_max):
+			hourly_max = current
+			db.child("people_count").child('canteen').child(weekday[now.weekday()]).child(str(now.hour)).set(hourly_max)
+		#if db.child("people_count") != x[-1]:
+		#	db.child("people_count").value = x[-1]
 
                 # Display the output
 		for (i, (k, v)) in enumerate(info):
