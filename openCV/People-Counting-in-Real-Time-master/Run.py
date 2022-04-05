@@ -295,16 +295,16 @@ def run():
 		info2 = [
 		("Total people inside", x),
 		]
-		if(x[-1] != current):
-			current = x[-1]
-			db.child("people_count").child('canteen').child('current').set(current)
-					
-		if(current > hourly_max):
-			hourly_max = current
-			db.child("people_count").child('canteen').child(weekday[now.weekday()]).child(str(now.hour)).set(hourly_max)
+		if(len(x) !=0):
+			if(x[-1] != current):
+				current = x[-1]
+				db.child("people_count").child('canteen').child('current').set(current)
+						
+			if(current > hourly_max):
+				hourly_max = current
+				db.child("people_count").child('canteen').child(weekday[now.weekday()]).child(str(now.hour)).set(hourly_max)
 		#if db.child("people_count") != x[-1]:
 		#	db.child("people_count").value = x[-1]
-
                 # Display the output
 		for (i, (k, v)) in enumerate(info):
 			text = "{}: {}".format(k, v)
