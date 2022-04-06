@@ -1,22 +1,20 @@
 package com.example.feast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class HomePage extends AppCompatActivity {
@@ -29,38 +27,75 @@ public class HomePage extends AppCompatActivity {
 
         linearlayout = findViewById(R.id.homePageLayout); // initialises the LinearLayout into linearlayout
 
-        int n = 5;
+        //singleton
+        CreateEstablishments.getInstance();
+        List<FNBEstablishment> fnbList = CreateEstablishments.getList();
 
-        for (int i = 0; i <= n; i++){
-            if (i == 0){
-                TextView firstEmptySpace = new TextView(this); // for the empty space above the first FNB Button
-                firstEmptySpace.setTextSize(2);
-                linearlayout.addView(firstEmptySpace);
-            }
+        //TODO: choose sorting method
+        //get the comparator
+        Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
 
+        Collections.sort(fnbList, chosenComparator); // order fnb establishments based on isFavorite, then chosen sorting method
+        LocalDate localDate = LocalDate.now();
+        String time = String.valueOf(localDate);
+        Toast.makeText(getApplicationContext(), time, Toast.LENGTH_LONG).show();
+
+        for (FNBEstablishment est : fnbList) {
             FNBButton fnbButton = new FNBButton(this);
             TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
+            fnbButton.setFNBEstablishmentName(est.name);
+            fnbButton.setOpen(est.isOpen());
+            fnbButton.setCapacity(String.valueOf(est.crowdLevel.crowdPercentage));
+//            fnbButton.setFNBPhoto();
+            fnbButton.setWaitingTime(String.valueOf(est.crowdLevel.currentCrowdLevel));
 
-            if (i == 1){
-                fnbButton.setFNBEstablishmentName("D'Star Bistro");
-                fnbButton.setOpeningHours("10am to 10pm");
-            }
-
-            if (i == 3){
-                fnbButton.setFNBEstablishmentName("GomGom");
-                fnbButton.setCapacity("200%");
-            }
+            //TODO
+//            fnbButton.setIsFavourite();
+//            fnbButton.setIsHalal();
+//            fnbButton.setIsFavourite();
+//            fnbButton.setIsOpen();
 
             emptySpace.setTextSize(5);
             linearlayout.addView(fnbButton);
             linearlayout.addView(emptySpace);
 
-            if (i == n){
-                TextView lastEmptySpace = new TextView(this); // for the empty space below the last FNB Button
-                lastEmptySpace.setTextSize(2);
-                linearlayout.addView(lastEmptySpace);
-            }
         }
+
+        TextView lastEmptySpace = new TextView(this); // for the empty space below the last FNB Button
+        lastEmptySpace.setTextSize(2);
+        linearlayout.addView(lastEmptySpace);
+
+        // old instantiation
+//        for (int i = 0; i <= 5; i++){
+//            if (i == 0){
+//                TextView firstEmptySpace = new TextView(this); // for the empty space above the first FNB Button
+//                firstEmptySpace.setTextSize(2);
+//                linearlayout.addView(firstEmptySpace);
+//            }
+//
+//            FNBButton fnbButton = new FNBButton(this);
+//            TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
+//
+//            if (i == 1){
+//                fnbButton.setFNBEstablishmentName("D'Star Bistro");
+//                fnbButton.setOpeningHours("10am to 10pm");
+//            }
+//
+//            if (i == 3){
+//                fnbButton.setFNBEstablishmentName("GomGom");
+//                fnbButton.setCapacity("200%");
+//            }
+//
+//            emptySpace.setTextSize(5);
+//            linearlayout.addView(fnbButton);
+//            linearlayout.addView(emptySpace);
+//
+//            if (i == 5){
+//                TextView lastEmptySpace = new TextView(this); // for the empty space below the last FNB Button
+//                lastEmptySpace.setTextSize(2);
+//                linearlayout.addView(lastEmptySpace);
+//            }
+//        }
 
         /* Testing for CrowdLevel and WeeklyTracker attribute of FNBEstablishment
            Attributes of Crowdlevel and WeeklyTracker must be set before they can be get
@@ -124,7 +159,7 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        fnbButton.getOpeningHours().setOnClickListener(new View.OnClickListener() {
+        fnbButton.getOpen().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                goToOthersInfoPage(view);
@@ -212,7 +247,7 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        fnbButton.getOpeningHours().setOnClickListener(new View.OnClickListener() {
+        fnbButton.getOpen().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                goToCanteenPage(view);

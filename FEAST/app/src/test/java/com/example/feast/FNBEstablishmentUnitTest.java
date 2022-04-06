@@ -5,6 +5,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class FNBEstablishmentUnitTest {
     @Test
@@ -14,9 +18,9 @@ public class FNBEstablishmentUnitTest {
     }
     @Test
     public void CreateFNBEstablishmentCheck(){
-        FNBEstablishment creation = new FNBEstablishment(10, false, "creation", "00:00:00", "23:59:59", "24/7");
+        FNBEstablishment creation = new FNBEstablishment(10, false,false, "creation", "00:00:00", "23:59:59", "24/7");
         System.out.println(creation.openHour);
-        assertEquals(10, creation.maxCapacity);
+        assertEquals(10,creation.maxCapacity);
         assertEquals(false, creation.isFavorite);
         assertEquals("creation", creation.name);
         assertEquals("00", creation.openHour);
@@ -77,5 +81,26 @@ public class FNBEstablishmentUnitTest {
         default_.setDaysOpen("weekend");
 
         assertEquals("Close", default_.isOpen()); //Manually set Open/Close value based on current time
+    }
+
+    @Test
+    public void FNBEstablishmentFavSortCheck() throws Exception {
+        List<FNBEstablishment> testSortList = new ArrayList<>();
+        FNBEstablishment af = new FNBEstablishment(10, true,false, "a", "00:00:00", "23:59:59", "24/7");
+        FNBEstablishment bnf = new FNBEstablishment(10, false,false, "b", "00:00:00", "23:59:59", "24/7");
+        FNBEstablishment cf = new FNBEstablishment(10, true,false, "c", "00:00:00", "23:59:59", "24/7");
+        FNBEstablishment dnf = new FNBEstablishment(10, false,false, "d", "00:00:00", "23:59:59", "24/7");
+        testSortList.add(af);
+        testSortList.add(bnf);
+        testSortList.add(cf);
+        testSortList.add(dnf);
+
+        Comparator favCompare = new IsFavoriteComparator();
+        Collections.sort(testSortList, favCompare);
+        String[] output = {"a","c","b","d"};
+        for (int i = 0; i < testSortList.size(); i++) {
+            assertEquals(output[i],testSortList.get(i).name);
+        }
+
     }
 }

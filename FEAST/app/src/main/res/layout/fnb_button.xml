@@ -75,7 +75,7 @@
         android:clickable="true"
         android:gravity="center"
         android:text="@string/test_capacity"
-        android:textColor="#FF0000"
+        android:textColor="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dotText"
         app:layout_constraintTop_toTopOf="parent"
@@ -97,13 +97,13 @@
         app:layout_constraintVertical_bias="0.135" />
 
     <TextView
-        android:id="@+id/openingHours"
+        android:id="@+id/isOpen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:clickable="true"
         android:gravity="center"
-        android:text="@string/test_openingHours"
+        android:text="@string/open"
         android:textColor="#83859C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/openingHoursText"

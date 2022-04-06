@@ -7,4 +7,5 @@
     <string name="test_waitingTime">30 - 40 mins</string>
     <string name="test_capacity">Full 100%</string>
     <string name="test_openingHours">8am - 7:30pm</string>
+    <string name="open">Open</string>
 </resources>

@@ -12,11 +12,11 @@ public class IsFavoriteComparator implements Comparator<FNBEstablishment> {
         }
         else if (fnb1.isFavorite)
         {
-            return 1;
+            return -1;
         }
         else
         {
-            return -1;
+            return 1;
         }
     }
 

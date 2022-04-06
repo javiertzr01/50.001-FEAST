@@ -1,11 +1,13 @@
 package com.example.feast;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class FNBButton extends ConstraintLayout {
     private TextView fnbEstablishmentName; // for the name of the F&B establishment (e.g. Canteen)
     private TextView waitingTime; // for the estimated waiting time at the F&B establishment given current crowd levels
     private TextView capacity; // for the current capacity of the F&B establishment, consisting of a word description and a percentage (e.g. Full 100%)
-    private TextView openingHours; // for the opening hours of the F&B establishment (e.g. 8am to 7.30pm)
+    private TextView open; // for the opening hours of the F&B establishment (e.g. 8am to 7.30pm)
     private ImageView fnbPhoto; // for a picture of the F&B establishment, to grab the image from the database or from some website? Backend team to clarify
     private TextView dotText; // constant
     private TextView openingHoursText; // constant
@@ -30,7 +32,7 @@ public class FNBButton extends ConstraintLayout {
         this.fnbEstablishmentName = view.findViewById(R.id.fnbEstablishmentName);
         this.waitingTime = view.findViewById(R.id.waitingTime);
         this.capacity = view.findViewById(R.id.capacity);
-        this.openingHours = view.findViewById(R.id.openingHours);
+        this.open = view.findViewById(R.id.isOpen);
         this.fnbPhoto = view.findViewById(R.id.fnbPhoto);
         this.dotText = view.findViewById(R.id.dotText);
         this.openingHoursText = view.findViewById(R.id.openingHoursText);
@@ -53,8 +55,8 @@ public class FNBButton extends ConstraintLayout {
         return capacity;
     }
 
-    public TextView getOpeningHours() {
-        return openingHours;
+    public TextView getOpen() {
+        return open;
     }
 
     public ImageView getFnbPhoto() {
@@ -101,9 +103,15 @@ public class FNBButton extends ConstraintLayout {
         this.capacity.setText(value);
     }
 
-    public void setOpeningHours(String value){
+    public void setOpen(String value){
 //        this.openingHours.setText(R.string.test_openingHours); // pull the current opening hours of the F&B establishment from the database; currently a placeholder test value
-        this.openingHours.setText(value);
+        if (value == "Closed"){
+            this.open.setTextColor(Color.parseColor("#FF0000"));
+        }
+        else{
+            this.open.setTextColor(Color.parseColor("#008000"));
+        }
+        this.open.setText(value);
     }
 
     public void setFNBPhoto(String value){

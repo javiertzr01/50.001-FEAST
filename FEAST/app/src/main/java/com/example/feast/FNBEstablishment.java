@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class FNBEstablishment{
     int maxCapacity;
     boolean isFavorite;
+    boolean isHalal;
     String name;
     String openHour;
     String closeHour;
@@ -27,6 +28,7 @@ public class FNBEstablishment{
     {
         maxCapacity = 1;
         isFavorite = false;
+        isHalal = false;
         name = "defaultFNB";
         openHour = "08";
         openMin = "00";
@@ -44,14 +46,15 @@ public class FNBEstablishment{
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    FNBEstablishment(int maxCapacity, boolean isFavorite, String name, String openingHour, String closingHour, String description) //openingHour and closingHour must be in "hh:mm" format
+    FNBEstablishment(Integer maxCapacity, boolean isFavorite, boolean isHalal, String name, String openingHour, String closingHour, String description) //openingHour and closingHour must be in "hh:mm" format
     {
         this.maxCapacity = maxCapacity;
         this.isFavorite = isFavorite;
+        this.isHalal = isHalal;
         this.name = name;
         this.description = description;
         for (DayOfWeek d: DayOfWeek.values()){      //From Sunday to Saturday
-            daysOpen.put(d, false);
+            daysOpen.put(d, true);
         }
         this.crowdLevel = new CrowdLevel();
         this.weeklyTracker = new WeeklyTracker();
@@ -161,7 +164,7 @@ public class FNBEstablishment{
             return "Open";
         }
 
-        return "Close";
+        return "Closed";
     }
 //Future Improvements: (If we not lazy)
 // does not account for specific dates closed
