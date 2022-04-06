@@ -6,11 +6,11 @@ public class IsFavoriteComparator implements Comparator<FNBEstablishment> {
 
     public int compare(FNBEstablishment fnb1, FNBEstablishment fnb2)
     {
-        if (fnb1.isFavorite == fnb2.isFavorite)
+        if (fnb1.getIsFavorite() == fnb2.getIsFavorite())
         {
             return fnb1.name.compareTo(fnb2.name);
         }
-        else if (fnb1.isFavorite)
+        else if (fnb1.getIsFavorite())
         {
             return -1;
         }

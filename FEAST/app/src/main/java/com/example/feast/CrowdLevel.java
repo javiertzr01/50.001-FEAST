@@ -39,7 +39,7 @@ public class CrowdLevel{
 
     public void setCrowdPercentage(FNBEstablishment fnb)
     {
-        this.crowdPercentage = this.currentCapacity/ fnb.maxCapacity;
+        this.crowdPercentage = this.currentCapacity/ fnb.getMaxCapacity();
     }
 
     public void setWaitingTime()

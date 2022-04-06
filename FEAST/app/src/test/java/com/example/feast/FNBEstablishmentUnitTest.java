@@ -14,14 +14,15 @@ public class FNBEstablishmentUnitTest {
     @Test
     public void FNBEstablishmentDefaultCheck(){
         FNBEstablishment default_ = new FNBEstablishment();
-        assertEquals("Close" , default_.isOpen());
+        assertEquals("Closed" , default_.isOpen());
     }
     @Test
     public void CreateFNBEstablishmentCheck(){
-        FNBEstablishment creation = new FNBEstablishment(10, false,false, "creation", "00:00:00", "23:59:59", "24/7");
+        FNBEstablishment creation = new FNBEstablishment.FNBBuilder().setMaxCapacity(10).setFavorite(false).setHalal(false).setName("creation").setOpeningHour("00:00:00").setClosingHour("23:59:59").setDescription("24/7").build();
+        // FNBEstablishment creation = new FNBEstablishment(10, false,false, "creation", "00:00:00", "23:59:59", "24/7");
         System.out.println(creation.openHour);
-        assertEquals(10,creation.maxCapacity);
-        assertEquals(false, creation.isFavorite);
+        assertEquals(10,creation.getMaxCapacity());
+        assertEquals(false, creation.getIsFavorite());
         assertEquals("creation", creation.name);
         assertEquals("00", creation.openHour);
         assertEquals("00", creation.openMin);
@@ -62,7 +63,7 @@ public class FNBEstablishmentUnitTest {
         default_.setOpeningClosingTime("00:00:00", "23:59:59");
         default_.setDaysOpen("weekend");
 
-        assertEquals("Close", default_.isOpen());
+        assertEquals("Closed", default_.isOpen());
     }
 
     @Test
@@ -80,7 +81,7 @@ public class FNBEstablishmentUnitTest {
         default_.setOpeningClosingTime("14:00:00", "14:01:00");
         default_.setDaysOpen("weekend");
 
-        assertEquals("Close", default_.isOpen()); //Manually set Open/Close value based on current time
+        assertEquals("Closed", default_.isOpen()); //Manually set Open/Close value based on current time
     }
 
     @Test
