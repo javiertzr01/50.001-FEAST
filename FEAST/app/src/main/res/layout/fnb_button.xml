@@ -19,7 +19,7 @@
         android:contentDescription="A photo of the FnB Establishment"
         android:gravity="center"
         android:scaleType="fitXY"
-        android:src="@drawable/test_sutd_canteen"
+        android:src="@drawable/canteen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/waitingTime"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.56" />
+        app:layout_constraintVertical_bias="0.549" />
 
     <TextView
         android:id="@+id/waitingTime"
@@ -71,7 +71,7 @@
         android:id="@+id/capacity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:clickable="true"
         android:gravity="center"
         android:text="@string/test_capacity"
@@ -80,21 +80,6 @@
         app:layout_constraintStart_toEndOf="@+id/dotText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.549" />
-
-    <TextView
-        android:id="@+id/openingHoursText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:clickable="true"
-        android:gravity="center"
-        android:text="@string/openingHoursText"
-        android:textColor="#83859C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waitingTimePhoto"
-        app:layout_constraintVertical_bias="0.135" />
 
     <TextView
         android:id="@+id/isOpen"
@@ -106,9 +91,11 @@
         android:text="@string/open"
         android:textColor="#83859C"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/openingHoursText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintVertical_bias="0.741" />
 
     <ImageView
         android:id="@+id/historicalTrendPhoto"
@@ -122,14 +109,14 @@
         android:src="@drawable/historical_trends"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openingHoursText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.909" />
 
     <TextView
         android:id="@+id/historyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:clickable="true"
         android:gravity="center"
         android:text="@string/historyText"
@@ -137,7 +124,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/historicalTrendPhoto"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.84" />
+        app:layout_constraintVertical_bias="0.906" />
 
     <ImageView
         android:id="@+id/waitingTimePhoto"
@@ -152,6 +139,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.551" />
+
+    <Button
+        android:id="@+id/favouriteIndicator"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="#FFFFFF"
+        android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.136" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
