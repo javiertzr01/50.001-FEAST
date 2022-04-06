@@ -62,25 +62,30 @@ public class HomePage extends AppCompatActivity {
             }
         }
 
-        /* Testing for CrowdLevel and WeeklyTracker
+        /* Testing for CrowdLevel and WeeklyTracker attribute of FNBEstablishment
            Attributes of Crowdlevel and WeeklyTracker must be set before they can be get
            Attributes also can only be set in onDataChange as values are retrieved from Firebase
 
-        WeeklyTracker canteenTracker = new WeeklyTracker();
-        CrowdLevel canteenCrowd = new CrowdLevel();
-        FNBEstablishment canteen = new FNBEstablishment(10, false, "Canteen", "00:00:00", "23:59:59", "place");
+        FNBEstablishment canteen = new FNBEstablishment(5, false, "Canteen", "00:00:00", "23:59:59", "place");
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
         db.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                canteenTracker.setWeeklyTrackerTable(snapshot, canteen);
-                System.out.println(canteenTracker.getWeeklyTrackerTable());
-                canteenCrowd.setCurrentCapacity(snapshot, canteen);
-                System.out.println(canteenCrowd.getCurrentCapacity());
-                canteenCrowd.setCrowdPercentage(canteen);
-                System.out.println(canteenCrowd.getCrowdPercentage());
+                canteen.weeklyTracker.setWeeklyTrackerTable(snapshot, canteen);
+                System.out.println(canteen.weeklyTracker.getWeeklyTrackerTable());
+
+                canteen.crowdLevel.setCurrentCapacity(snapshot, canteen);
+                System.out.println(canteen.crowdLevel.getCurrentCapacity());
+
+                canteen.crowdLevel.setCrowdPercentage(canteen);
+                System.out.println(canteen.crowdLevel.getCrowdPercentage());
+                System.out.println(canteen.crowdLevel.getCurrentCrowdLevelString());
+
                 System.out.println(canteen.maxCapacity);
+
+                canteen.crowdLevel.setWaitingTime();
+                System.out.println(canteen.crowdLevel.getWaitingTime());
 
             }
 
