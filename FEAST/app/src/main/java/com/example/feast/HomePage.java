@@ -3,6 +3,7 @@ package com.example.feast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -44,16 +45,19 @@ public class HomePage extends AppCompatActivity {
             FNBButton fnbButton = new FNBButton(this);
             TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
             fnbButton.setFNBEstablishmentName(est.name);
-            fnbButton.setOpen(est.isOpen());
-            fnbButton.setCapacity(String.valueOf(est.crowdLevel.crowdPercentage));
-//            fnbButton.setFNBPhoto();
-            fnbButton.setWaitingTime(String.valueOf(est.crowdLevel.currentCrowdLevel));
+            fnbButton.setIsOpen(est.isOpen());
+            fnbButton.setCapacity(est.crowdLevel.getCurrentCrowdLevelString() , est.crowdLevel.crowdPercentage); // changed - Fuo En
+//            fnbButton.setFNBPhoto(); - this might not be needed at all - Fuo En
+            fnbButton.setWaitingTime(String.valueOf(est.crowdLevel.currentCrowdLevel)); // need to change this - Fuo En
 
             //TODO
 //            fnbButton.setIsFavourite();
 //            fnbButton.setIsHalal();
-//            fnbButton.setIsFavourite();
+            fnbButton.setIsFavourite(est.isFavorite); // changed - Fuo En
 //            fnbButton.setIsOpen();
+
+            // for the intent, on hold first
+//            setGoToOthersInfoPage(fnbButton, est);
 
             emptySpace.setTextSize(5);
             linearlayout.addView(fnbButton);
@@ -137,53 +141,46 @@ public class HomePage extends AppCompatActivity {
 
     // TODO
     // helper method to go to OthersInfoPage upon clicking the FNBButton
-    public void setGoToOthersInfoPage(FNBButton fnbButton){
+    public void setGoToOthersInfoPage(FNBButton fnbButton, FNBEstablishment est){
         fnbButton.getFnbEstablishmentName().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                goToOthersInfoPage(view);
+//                goToOthersInfoPage(view, fnbButton, est);
             }
         });
 
         fnbButton.getWaitingTime().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                goToOthersInfoPage(view);
+//                goToOthersInfoPage(view, fnbButton, est);
             }
         });
 
         fnbButton.getCapacity().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                goToOthersInfoPage(view);
+//                goToOthersInfoPage(view, fnbButton, est);
             }
         });
 
-        fnbButton.getOpen().setOnClickListener(new View.OnClickListener() {
+        fnbButton.getIsOpen().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                goToOthersInfoPage(view);
+//                goToOthersInfoPage(view, fnbButton, est);
             }
         });
 
         fnbButton.getFnbPhoto().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                goToOthersInfoPage(view);
+//                goToOthersInfoPage(view, fnbButton, est);
             }
         });
 
         fnbButton.getDotText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                goToOthersInfoPage(view);
-            }
-        });
-
-        fnbButton.getOpeningHoursText().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                goToOthersInfoPage(view);
+//                goToOthersInfoPage(view, fnbButton, est);
             }
         });
 
@@ -206,22 +203,38 @@ public class HomePage extends AppCompatActivity {
         fnbButton.getWaitingTimePhoto().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                goToOthersInfoPage(view);
+//                goToOthersInfoPage(view, fnbButton, est);
             }
         });
 
         fnbButton.getFnbButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                goToOthersInfoPage(view);
+//                goToOthersInfoPage(view, fnbButton, est);
             }
         });
     }
 
     // TODO
-//    public void goToOthersInfoPage(View view){
+//    public void goToOthersInfoPage(View view, FNBButton fnbButton, FNBEstablishment est) {
 //        Intent intent = new Intent(HomePage.this, OthersInfoPage.class);
+//        intent.putExtra("fnbEstablishmentName", fnbButton.getFnbEstablishmentNameString());
+//        intent.putExtra("waitingTime", fnbButton.getWaitingTimeString());
+//        intent.putExtra("capacity", fnbButton.getCapacityString());
+//        intent.putExtra("isOpen", fnbButton.getIsOpenString());
+//        intent.putExtra("isFavourite", fnbButton.getIsFavourite());
+//        intent.putExtra("isHalal", est.isHalal);
+//        intent.putExtra("openHour", est.openHour);
+//        intent.putExtra("closeHour", est.closeHour);
+//        intent.putExtra("openMin", est.openMin);
+//        intent.putExtra("closeMin", est.closeMin);
+//        intent.putExtra("openSec", est.openSec);
+//        intent.putExtra("closeSec", est.closeSec);
+//        intent.putExtra("description", est.description);
+//        // put the menu and prices into the intent
+//        // put the waiting time into the intent
 //        startActivity(intent);
+//    }
 
     // TODO
     // helper method to go to CanteenPage upon clicking the FNBButton
@@ -247,7 +260,7 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        fnbButton.getOpen().setOnClickListener(new View.OnClickListener() {
+        fnbButton.getIsOpen().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                goToCanteenPage(view);
@@ -262,13 +275,6 @@ public class HomePage extends AppCompatActivity {
         });
 
         fnbButton.getDotText().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                goToCanteenPage(view);
-            }
-        });
-
-        fnbButton.getOpeningHoursText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                goToCanteenPage(view);
