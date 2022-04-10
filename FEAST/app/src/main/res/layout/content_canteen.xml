@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
+    tools:context=".CanteenPage"
+    tools:showIn="@layout/activity_canteen">
+
+    <include layout="@layout/info_canteen"/>
+
+        <Button
+            android:id="@+id/historical_trendButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:text="@string/view_historical_trends"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/more_infoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/click_to_view_more_information"
+            android:textColor="@color/feast_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/indian_foodButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:text="@string/indian_food"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/western_foodButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:text="@string/western_food"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/healthy_soupButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:text="@string/healthy_soup"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/japanese_korean_foodButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:text="@string/japanese_and_korean_food"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/economy_riceButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:text="@string/economic_rice"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/drinks_snacksButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:text="@string/drinks_and_snacks"
+            android:textColor="@color/black" />
+
+</LinearLayout>
