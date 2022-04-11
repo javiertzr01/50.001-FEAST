@@ -2,7 +2,14 @@ package com.example.feast;
 
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +25,7 @@ public class CreateEstablishments {
     FNBEstablishment simons;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private CreateEstablishments(){
+    private CreateEstablishments() {
         canteen = new FNBEstablishment.FNBBuilder().setMaxCapacity(200).setFavorite(false).setHalal(true).setName("Canteen").setOpeningHour("08:00:00").setClosingHour("19:30:00").setDescription("PlaceHolder").build();
         // canteen = new FNBEstablishment(200, false, true, "Canteen", "08:00:00", "19:30:00", "place");
         fnbList.add(canteen);

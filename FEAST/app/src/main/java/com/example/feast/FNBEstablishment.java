@@ -2,7 +2,14 @@ package com.example.feast;
 
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.*;
 import java.util.HashMap;
@@ -197,11 +204,6 @@ public class FNBEstablishment{
         this.closeSec = String.valueOf(closeSecCharArray);
     }
 
-    /* public void setDescription(String newDescription)
-    {
-        this.description = newDescription;
-    }*/
-
     @RequiresApi(api = Build.VERSION_CODES.O)       //Make sure version is high enough (Oreo/Android 8.0)
     public void setDaysOpen(boolean sunday, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday){
         daysOpen.put(DayOfWeek.SUNDAY, sunday);
@@ -260,6 +262,9 @@ public class FNBEstablishment{
 
         return "Closed";
     }
+
+   
+
 //Future Improvements: (If we not lazy)
 // does not account for specific dates closed
 // does not account for different closing times on different days

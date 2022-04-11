@@ -33,7 +33,7 @@ public class CrowdLevel{
     public void setCurrentCapacity(DataSnapshot ds, FNBEstablishment fnb)
     {
         //Get value of current capacity of store from database
-        this.currentCapacity = ds.child(fnb.name).child("currentCapacity").getValue(Integer.class);
+        this.currentCapacity = ds.child(fnb.name).child("currentCapacity").getValue(Double.class);
     }
 
 
