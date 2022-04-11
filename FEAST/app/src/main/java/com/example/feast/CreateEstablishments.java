@@ -25,7 +25,7 @@ public class CreateEstablishments {
     FNBEstablishment simons;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private CreateEstablishments(){
+    private CreateEstablishments() {
         canteen = new FNBEstablishment.FNBBuilder().setMaxCapacity(200).setFavorite(false).setHalal(true).setName("Canteen").setOpeningHour("08:00:00").setClosingHour("19:30:00").setDescription("PlaceHolder").build();
         // canteen = new FNBEstablishment(200, false, true, "Canteen", "08:00:00", "19:30:00", "place");
         fnbList.add(canteen);
@@ -48,6 +48,11 @@ public class CreateEstablishments {
 
     }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
     /*public static void updateFnbList()
     {
         final DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
@@ -73,9 +78,15 @@ public class CreateEstablishments {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+<<<<<<< Updated upstream
         });
     }*/
 
+=======
+        });*/
+
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static CreateEstablishments getInstance() {
         if (instance == null) instance = new CreateEstablishments();
