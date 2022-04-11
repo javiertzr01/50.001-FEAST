@@ -2,7 +2,14 @@ package com.example.feast;
 
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +41,40 @@ public class CreateEstablishments {
         simons = new FNBEstablishment.FNBBuilder().setMaxCapacity(30).setFavorite(false).setHalal(true).setName("Simon's").setOpeningHour("10:00:00").setClosingHour("17:00:00").setDescription("PlaceHolder").build();
         // simons = new FNBEstablishment(30, false, true, "Simon's", "10:00:00", "17:00:00", "place");
         fnbList.add(simons);
+
+        System.out.println("here");
+
+        //updateFnbList();
+
     }
+
+    /*public static void updateFnbList()
+    {
+        final DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(FNBEstablishment fnb: fnbList)
+                {
+                    try {
+                        fnb.crowdLevel.setCurrentCapacity(snapshot, fnb);
+                        fnb.crowdLevel.setCrowdPercentage(fnb);
+                        fnb.crowdLevel.setWaitingTime();
+                        System.out.println(fnb.name + fnb.crowdLevel.getCurrentCapacity());
+                    }
+                    catch (NullPointerException e)
+                    {
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }*/
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static CreateEstablishments getInstance() {

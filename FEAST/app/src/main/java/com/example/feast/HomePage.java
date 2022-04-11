@@ -1,5 +1,6 @@
 package com.example.feast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collections;
@@ -21,7 +28,7 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class HomePage extends AppCompatActivity {
     LinearLayout linearlayout; // declaration of the LinearLayout of activity_home_page.xml
-
+    List<FNBEstablishment> fnbList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,23 +38,44 @@ public class HomePage extends AppCompatActivity {
 
         //singleton
         CreateEstablishments.getInstance();
-        List<FNBEstablishment> fnbList = CreateEstablishments.getList();
+        fnbList = CreateEstablishments.getList();
+        final DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (FNBEstablishment fnb : fnbList) {
+                    try {
+                        fnb.crowdLevel.setCurrentCapacity(snapshot, fnb);
+                        fnb.crowdLevel.setCrowdPercentage(fnb);
+                        fnb.crowdLevel.setWaitingTime();
+                        System.out.println(fnb.name + fnb.crowdLevel.getCurrentCapacity());
+                        finish();
+                        startActivity(getIntent());
+                    } catch (NullPointerException e) {
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //TODO: choose sorting method
         //get the comparator
         Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
 
         Collections.sort(fnbList, chosenComparator); // order fnb establishments based on isFavorite, then chosen sorting method
-        LocalDate localDate = LocalDate.now();
-        String time = String.valueOf(localDate);
-        Toast.makeText(getApplicationContext(), time, Toast.LENGTH_LONG).show();
 
         for (FNBEstablishment est : fnbList) {
+            System.out.println(est.name + est.crowdLevel.currentCapacity);
             FNBButton fnbButton = new FNBButton(this);
             TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
             fnbButton.setFNBEstablishmentName(est.name);
             fnbButton.setIsOpen(est.isOpen());
-            fnbButton.setCapacity(est.crowdLevel.getCurrentCrowdLevelString() , est.crowdLevel.crowdPercentage); // changed - Fuo En
+            fnbButton.setCapacity(est.crowdLevel.getCurrentCrowdLevelString(), est.crowdLevel.crowdPercentage); // changed - Fuo En
 //            fnbButton.setFNBPhoto(); - this might not be needed at all - Fuo En
             fnbButton.setWaitingTime(String.valueOf(est.crowdLevel.currentCrowdLevel)); // need to change this - Fuo En
 
@@ -58,11 +86,9 @@ public class HomePage extends AppCompatActivity {
 //            fnbButton.setIsOpen();
 
             // for the intent
-            if (est.name.equals("Canteen")){ // different intent for canteen button
+            if (est.name.equals("Canteen")) { // different intent for canteen button
                 setGoToCanteenPage(fnbButton, est);
-            }
-
-            else{
+            } else {
                 setGoToOthersInfoPage(fnbButton, est);
             }
 
@@ -75,74 +101,8 @@ public class HomePage extends AppCompatActivity {
         TextView lastEmptySpace = new TextView(this); // for the empty space below the last FNB Button
         lastEmptySpace.setTextSize(2);
         linearlayout.addView(lastEmptySpace);
-
-        // old instantiation
-//        for (int i = 0; i <= 5; i++){
-//            if (i == 0){
-//                TextView firstEmptySpace = new TextView(this); // for the empty space above the first FNB Button
-//                firstEmptySpace.setTextSize(2);
-//                linearlayout.addView(firstEmptySpace);
-//            }
-//
-//            FNBButton fnbButton = new FNBButton(this);
-//            TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
-//
-//            if (i == 1){
-//                fnbButton.setFNBEstablishmentName("D'Star Bistro");
-//                fnbButton.setOpeningHours("10am to 10pm");
-//            }
-//
-//            if (i == 3){
-//                fnbButton.setFNBEstablishmentName("GomGom");
-//                fnbButton.setCapacity("200%");
-//            }
-//
-//            emptySpace.setTextSize(5);
-//            linearlayout.addView(fnbButton);
-//            linearlayout.addView(emptySpace);
-//
-//            if (i == 5){
-//                TextView lastEmptySpace = new TextView(this); // for the empty space below the last FNB Button
-//                lastEmptySpace.setTextSize(2);
-//                linearlayout.addView(lastEmptySpace);
-//            }
-//        }
-
-        /* Testing for CrowdLevel and WeeklyTracker attribute of FNBEstablishment
-           Attributes of Crowdlevel and WeeklyTracker must be set before they can be get
-           Attributes also can only be set in onDataChange as values are retrieved from Firebase
-
-        FNBEstablishment canteen = new FNBEstablishment(5, false, "Canteen", "00:00:00", "23:59:59", "place");
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
-        db.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                canteen.weeklyTracker.setWeeklyTrackerTable(snapshot, canteen);
-                System.out.println(canteen.weeklyTracker.getWeeklyTrackerTable());
-
-                canteen.crowdLevel.setCurrentCapacity(snapshot, canteen);
-                System.out.println(canteen.crowdLevel.getCurrentCapacity());
-
-                canteen.crowdLevel.setCrowdPercentage(canteen);
-                System.out.println(canteen.crowdLevel.getCrowdPercentage());
-                System.out.println(canteen.crowdLevel.getCurrentCrowdLevelString());
-
-                System.out.println(canteen.maxCapacity);
-
-                canteen.crowdLevel.setWaitingTime();
-                System.out.println(canteen.crowdLevel.getWaitingTime());
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
-
     }
+
 
     @Override
     protected void onStart() {

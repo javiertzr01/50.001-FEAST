@@ -2,7 +2,14 @@ package com.example.feast;
 
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.*;
 import java.util.HashMap;
@@ -45,6 +52,15 @@ public class FNBEstablishment{
         }
         this.crowdLevel = new CrowdLevel();
         this.weeklyTracker = new WeeklyTracker();
+
+        /*this.updateFnbValues(new getFnbData() {
+            @Override
+            public void onDataReceived(double currentCapacity) {
+                FNBEstablishment.this.crowdLevel.setCurrentCapacity(currentCapacity);
+                FNBEstablishment.this.crowdLevel.setCrowdPercentage(FNBEstablishment.this);
+                FNBEstablishment.this.crowdLevel.setWaitingTime();
+            }
+        });*/
     }
 
     static class FNBBuilder {
@@ -260,6 +276,33 @@ public class FNBEstablishment{
 
         return "Closed";
     }
+
+    /*public void updateFnbValues(getFnbData fnbData)
+    {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("people_count");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try
+                {
+                    double fnbCurrentCapacity = snapshot.child(FNBEstablishment.this.name).child("currentCapacity").getValue(Double.class);
+                    System.out.println(FNBEstablishment.this.name + fnbCurrentCapacity);
+                    fnbData.onDataReceived(fnbCurrentCapacity);
+                }
+                catch (NullPointerException e)
+                {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }*/
+
 //Future Improvements: (If we not lazy)
 // does not account for specific dates closed
 // does not account for different closing times on different days
