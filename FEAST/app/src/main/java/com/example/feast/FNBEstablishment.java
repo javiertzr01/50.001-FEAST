@@ -18,17 +18,6 @@ public class FNBEstablishment extends Location{
     private int maxCapacity;
     private boolean isFavorite;
     private boolean isHalal;
-    String name;
-    String openHour;
-    String closeHour;
-    String openMin;
-    String closeMin;
-    String openSec;
-    String closeSec;
-    String description;
-    HashMap<DayOfWeek, Boolean> daysOpen = new HashMap<>();
-    CrowdLevel crowdLevel;
-    WeeklyTracker weeklyTracker;
 
     @RequiresApi(api = Build.VERSION_CODES.O)       //Make sure version is high enough (Oreo/Android 8.0)
     private FNBEstablishment(FNBBuilder fnBbuilder){
