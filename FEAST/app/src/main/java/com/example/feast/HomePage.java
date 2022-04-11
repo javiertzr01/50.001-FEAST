@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,52 +25,60 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class HomePage extends AppCompatActivity {
     LinearLayout linearlayout; // declaration of the LinearLayout of activity_home_page.xml
     List<FNBEstablishment> fnbList;
+    private final String sharedPrefFile = "com.example.android.mainsharedprefs";
+    private SharedPreferences mPreferences;
+    Set<String> favList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         ArrayList<FNBButton> fnbButtonArrayList = new ArrayList<>();
-
         linearlayout = findViewById(R.id.homePageLayout); // initialises the LinearLayout into linearlayout
+
+        // data persistence
+        mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        favList = mPreferences.getStringSet("favourites", Collections.emptySet());
+        System.out.println(favList);
 
         //singleton
         CreateEstablishments.getInstance();
+        CreateEstablishments.setFavourites(favList);
         fnbList = CreateEstablishments.getList();
 
-        //TODO: choose sorting method
-        //get the comparator
-        Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
 
+        // sort by
+        //TODO: choose sorting method
+        Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
         Collections.sort(fnbList, chosenComparator); // order fnb establishments based on isFavorite, then chosen sorting method
 
+        // creating fnbButton
         for (FNBEstablishment est : fnbList) {
-            System.out.println(est.name + est.crowdLevel.currentCapacity);
+            System.out.println(est.getIsFavorite());
             FNBButton fnbButton = new FNBButton(this);
             TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
             fnbButton.setFNBEstablishmentName(est.name);
             fnbButton.setIsOpen(est.isOpen());
-            fnbButton.setCapacity(est.crowdLevel.getCurrentCrowdLevelString(), est.crowdLevel.crowdPercentage); // changed - Fuo En
-//            fnbButton.setFNBPhoto(); - this might not be needed at all - Fuo En
-            fnbButton.setWaitingTime(String.valueOf(est.crowdLevel.currentCrowdLevel)); // need to change this - Fuo En
+            fnbButton.setCapacity(est.crowdLevel.getCurrentCrowdLevelString(), est.crowdLevel.crowdPercentage);
+            fnbButton.setWaitingTime(String.valueOf(est.crowdLevel.currentCrowdLevel));
 
-            //TODO
-//            fnbButton.setIsFavourite();
-//            fnbButton.setIsHalal();
-            fnbButton.setIsFavourite(est.getIsFavorite()); // changed - Fuo En
-//            fnbButton.setIsOpen();
+            fnbButton.setIsFavourite(est.getIsFavorite());
 
             emptySpace.setTextSize(5);
             linearlayout.addView(fnbButton);
             linearlayout.addView(emptySpace);
 
-            //add to list
+            // add to list of fnbButtons
             fnbButtonArrayList.add(fnbButton);
 
             // for the intent
@@ -134,6 +143,10 @@ public class HomePage extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.i("HomePage", "onPause");
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.clear();
+        preferenceEditor.putStringSet("favourites",favList);
+        preferenceEditor.apply();
     }
 
     @Override

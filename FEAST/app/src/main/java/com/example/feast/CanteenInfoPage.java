@@ -1,6 +1,7 @@
 package com.example.feast;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,18 +9,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Collections;
+import java.util.Set;
+
 public class CanteenInfoPage extends AppCompatActivity {
 
-    ImageButton mInfoBackButton;
-    TextView mInfoRestaurantName;
-    TextView mInfoRestaurant;
-    Button mViewHistTrendButton;
-    TextView mInfoMenu;
+    private final String sharedPrefFile = "com.example.android.mainsharedprefs";
+    private SharedPreferences mPreferences;
+    Set<String> favList;
 
     @Override
     public <T extends View> T findViewById(int id) {
@@ -95,6 +98,23 @@ public class CanteenInfoPage extends AppCompatActivity {
         ImageView mRestaurantImage = findViewById(R.id.restaurantImage);    //Init restaurant image
         mRestaurantImage.setImageResource(R.drawable.canteen);
 
+        // favourites button
+        mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        favList = mPreferences.getStringSet("favourites", Collections.emptySet());
+        Switch favouriteSwitch = findViewById(R.id.favouriteSwitch); //init Switch widget
+        favouriteSwitch.setChecked(favList.contains("Canteen")); //set current value based on saved preferences
+        favouriteSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (favouriteSwitch.isChecked()){
+                    favList.add("Canteen"); //add favourite
+                }
+                else{
+                    favList.remove("Canteen"); //remove favourite
+                }
+            }
+        });
+
         // TODO
         String menu = intent.getStringExtra("menu");    //get intent
         TextView mInfoMenu = findViewById(R.id.infoMenu);   //Init menu
@@ -109,5 +129,14 @@ public class CanteenInfoPage extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.clear();
+        preferenceEditor.putStringSet("favourites",favList);
+        preferenceEditor.apply();
     }
 }

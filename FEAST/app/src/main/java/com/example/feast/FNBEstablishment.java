@@ -181,6 +181,10 @@ public class FNBEstablishment{
 
     public void invIsFavorite(boolean isFavorite) { this.isFavorite = !this.isFavorite; }
 
+    public void setIsFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
     public boolean getIsFavorite() { return this.isFavorite; }
 
     public boolean getIsHalal(){return this.isHalal;}

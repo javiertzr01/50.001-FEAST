@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,17 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.Collections;
+import java.util.Set;
+
 public class OthersInfoPage extends AppCompatActivity {
 
-    ImageButton mInfoBackButton;
-    TextView mInfoRestaurantName;
-    TextView mInfoRestaurant;
-    Button mViewHistTrendButton;
-    TextView mInfoMenu;
+    private final String sharedPrefFile = "com.example.android.mainsharedprefs";
+    private SharedPreferences mPreferences;
+    Set<String> favList;
 
     @Override
     public <T extends View> T findViewById(int id) {
@@ -119,9 +123,27 @@ public class OthersInfoPage extends AppCompatActivity {
         else if (restaurantName.equals("Simon's")) {
             mRestaurantImage.setImageResource(R.drawable.simon); }
 
-        Button mViewHistTrendButton = findViewById(R.id.historical_trendButton);   //TODO
+        Button mViewHistTrendButton = findViewById(R.id.historical_trendButton);
 
-        // TODO
+
+        // favourites button
+        mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        favList = mPreferences.getStringSet("favourites", Collections.emptySet());
+        Switch favouriteSwitch = findViewById(R.id.favouriteSwitch); //init Switch widget
+        favouriteSwitch.setChecked(favList.contains(restaurantName)); //set current value based on saved preferences
+        favouriteSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (favouriteSwitch.isChecked()){
+                    favList.add(restaurantName); //add favourite
+                }
+                else{
+                    favList.remove(restaurantName); //remove favourite
+                }
+            }
+        });
+
+
         String menu = intent.getStringExtra("menu");    //get intent
         TextView mInfoMenu = findViewById(R.id.infoMenu);   //Init menu
         mInfoMenu.setText(menu);
@@ -136,4 +158,14 @@ public class OthersInfoPage extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.clear();
+        preferenceEditor.putStringSet("favourites",favList);
+        preferenceEditor.apply();
+    }
+
 }

@@ -1,18 +1,11 @@
 package com.example.feast;
 
 import android.os.Build;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class CreateEstablishments {
 
@@ -35,7 +28,7 @@ public class CreateEstablishments {
         crookedCooks = new FNBEstablishment.FNBBuilder().setMaxCapacity(50).setFavorite(false).setHalal(true).setName("Crooked Cooks").setOpeningHour("12:00:00").setClosingHour("20:00:00").setDescription("PlaceHolder").build();
         // crookedCooks = new FNBEstablishment(50, false, true, "Crooked Cooks", "12:00:00", "20:00:00", "place");
         fnbList.add(crookedCooks);
-        gomgom = new FNBEstablishment.FNBBuilder().setMaxCapacity(20).setFavorite(false).setHalal(false).setName("Gomgom").setOpeningHour("10:00:00").setClosingHour("18:00:00").setDescription("PlaceHolder").build();
+        gomgom = new FNBEstablishment.FNBBuilder().setMaxCapacity(20).setFavorite(false).setHalal(false).setName("Gomgom").setOpeningHour("10:00:00").setClosingHour("20:00:00").setDescription("PlaceHolder").build();
         // gomgom = new FNBEstablishment(20, false, false, "Gomgom", "10:00:00", "18:00:00", "place");
         fnbList.add(gomgom);
         simons = new FNBEstablishment.FNBBuilder().setMaxCapacity(30).setFavorite(false).setHalal(true).setName("Simon's").setOpeningHour("10:00:00").setClosingHour("17:00:00").setDescription("PlaceHolder").build();
@@ -51,5 +44,16 @@ public class CreateEstablishments {
 
     public static List<FNBEstablishment> getList(){
         return fnbList;
+    }
+
+    public static void setFavourites(Set<String> favList){
+        for (FNBEstablishment fnb : fnbList){
+            if (favList.contains(fnb.name)){
+                fnb.setIsFavorite(true);
+            }
+            else {
+                fnb.setIsFavorite(false);
+            }
+        }
     }
 }
