@@ -29,15 +29,8 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class HomePage extends AppCompatActivity {
     LinearLayout linearlayout; // declaration of the LinearLayout of activity_home_page.xml
-<<<<<<< Updated upstream
     List<FNBEstablishment> fnbList;
-=======
-<<<<<<< Updated upstream
 
-=======
-    boolean canPull;
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,11 +109,6 @@ public class HomePage extends AppCompatActivity {
         TextView lastEmptySpace = new TextView(this); // for the empty space below the last FNB Button
         lastEmptySpace.setTextSize(2);
         linearlayout.addView(lastEmptySpace);
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
-
 
         final DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
         db.addValueEventListener(new ValueEventListener() {
@@ -150,77 +138,6 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
-
-    }
->>>>>>> Stashed changes
-
-        // old instantiation
-//        for (int i = 0; i <= 5; i++){
-//            if (i == 0){
-//                TextView firstEmptySpace = new TextView(this); // for the empty space above the first FNB Button
-//                firstEmptySpace.setTextSize(2);
-//                linearlayout.addView(firstEmptySpace);
-//            }
-//
-//            FNBButton fnbButton = new FNBButton(this);
-//            TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
-//
-//            if (i == 1){
-//                fnbButton.setFNBEstablishmentName("D'Star Bistro");
-//                fnbButton.setOpeningHours("10am to 10pm");
-//            }
-//
-//            if (i == 3){
-//                fnbButton.setFNBEstablishmentName("GomGom");
-//                fnbButton.setCapacity("200%");
-//            }
-//
-//            emptySpace.setTextSize(5);
-//            linearlayout.addView(fnbButton);
-//            linearlayout.addView(emptySpace);
-//
-//            if (i == 5){
-//                TextView lastEmptySpace = new TextView(this); // for the empty space below the last FNB Button
-//                lastEmptySpace.setTextSize(2);
-//                linearlayout.addView(lastEmptySpace);
-//            }
-//        }
-
-        /* Testing for CrowdLevel and WeeklyTracker attribute of FNBEstablishment
-           Attributes of Crowdlevel and WeeklyTracker must be set before they can be get
-           Attributes also can only be set in onDataChange as values are retrieved from Firebase
-
-        FNBEstablishment canteen = new FNBEstablishment(5, false, "Canteen", "00:00:00", "23:59:59", "place");
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
-        db.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                canteen.weeklyTracker.setWeeklyTrackerTable(snapshot, canteen);
-                System.out.println(canteen.weeklyTracker.getWeeklyTrackerTable());
-
-                canteen.crowdLevel.setCurrentCapacity(snapshot, canteen);
-                System.out.println(canteen.crowdLevel.getCurrentCapacity());
-
-                canteen.crowdLevel.setCrowdPercentage(canteen);
-                System.out.println(canteen.crowdLevel.getCrowdPercentage());
-                System.out.println(canteen.crowdLevel.getCurrentCrowdLevelString());
-
-                System.out.println(canteen.maxCapacity);
-
-                canteen.crowdLevel.setWaitingTime();
-                System.out.println(canteen.crowdLevel.getWaitingTime());
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
-
->>>>>>> Stashed changes
     }
 
 
