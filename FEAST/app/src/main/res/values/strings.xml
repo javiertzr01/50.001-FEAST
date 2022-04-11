@@ -8,4 +8,25 @@
     <string name="test_capacity">Full 100%</string>
     <string name="test_openingHours">8am - 7:30pm</string>
     <string name="open">Open</string>
+    <string name="inforestaurantname">infoRestaurantName</string>
+    <string name="infobackarrow">infoBackArrow</string>
+    <string name="todo">TODO</string>
+    <string name="infobackbutton">infoBackButton</string>
+    <string name="infoRestaurantDetails">TextView</string>
+    <string name="restaurantpicture">RestaurantPicture</string>
+    <string name="view_historical_trends">View Historical Trends</string>
+    <string name="graphpic">graphPic</string>
+    <string name="menu">Menu</string>
+    <string name="favourite">Favourite</string>
+    <string name="feast">FEAST</string>
+    <string name="search_elements">Search elements</string>
+    <string name="click_to_view_more_information">Click to View More Information:</string>
+    <string name="indian_food">Indian Food</string>
+    <string name="western_food">Western Food</string>
+    <string name="healthy_soup">Healthy Soup</string>
+    <string name="japanese_and_korean_food">Japanese and Korean Food</string>
+    <string name="economic_rice">Economic Rice</string>
+    <string name="drinks_and_snacks">Drinks and Snacks</string>
+    <string name="canteen_title">Canteen</string>
+    <string name="statusText">Status:</string>
 </resources>

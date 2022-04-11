@@ -176,6 +176,8 @@ public class FNBEstablishment{
 
     public boolean getIsFavorite() { return this.isFavorite; }
 
+    public boolean getIsHalal(){return this.isHalal;}
+
     public void setOpeningClosingTime(String newOpeningHour, String newClosingHour)     //must be in "hh:mm" format
     {
         char[] openingHourCharArray = newOpeningHour.toCharArray();
