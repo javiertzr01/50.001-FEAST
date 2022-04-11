@@ -41,52 +41,8 @@ public class CreateEstablishments {
         simons = new FNBEstablishment.FNBBuilder().setMaxCapacity(30).setFavorite(false).setHalal(true).setName("Simon's").setOpeningHour("10:00:00").setClosingHour("17:00:00").setDescription("PlaceHolder").build();
         // simons = new FNBEstablishment(30, false, true, "Simon's", "10:00:00", "17:00:00", "place");
         fnbList.add(simons);
-
-        System.out.println("here");
-
-        //updateFnbList();
-
     }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
-    /*public static void updateFnbList()
-    {
-        final DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
-        db.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(FNBEstablishment fnb: fnbList)
-                {
-                    try {
-                        fnb.crowdLevel.setCurrentCapacity(snapshot, fnb);
-                        fnb.crowdLevel.setCrowdPercentage(fnb);
-                        fnb.crowdLevel.setWaitingTime();
-                        System.out.println(fnb.name + fnb.crowdLevel.getCurrentCapacity());
-                    }
-                    catch (NullPointerException e)
-                    {
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-<<<<<<< Updated upstream
-        });
-    }*/
-
-=======
-        });*/
-
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static CreateEstablishments getInstance() {
         if (instance == null) instance = new CreateEstablishments();
