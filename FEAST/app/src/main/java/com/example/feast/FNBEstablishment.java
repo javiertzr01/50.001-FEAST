@@ -52,15 +52,6 @@ public class FNBEstablishment{
         }
         this.crowdLevel = new CrowdLevel();
         this.weeklyTracker = new WeeklyTracker();
-
-        /*this.updateFnbValues(new getFnbData() {
-            @Override
-            public void onDataReceived(double currentCapacity) {
-                FNBEstablishment.this.crowdLevel.setCurrentCapacity(currentCapacity);
-                FNBEstablishment.this.crowdLevel.setCrowdPercentage(FNBEstablishment.this);
-                FNBEstablishment.this.crowdLevel.setWaitingTime();
-            }
-        });*/
     }
 
     static class FNBBuilder {
@@ -213,11 +204,6 @@ public class FNBEstablishment{
         this.closeSec = String.valueOf(closeSecCharArray);
     }
 
-    /* public void setDescription(String newDescription)
-    {
-        this.description = newDescription;
-    }*/
-
     @RequiresApi(api = Build.VERSION_CODES.O)       //Make sure version is high enough (Oreo/Android 8.0)
     public void setDaysOpen(boolean sunday, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday){
         daysOpen.put(DayOfWeek.SUNDAY, sunday);
@@ -277,31 +263,7 @@ public class FNBEstablishment{
         return "Closed";
     }
 
-    /*public void updateFnbValues(getFnbData fnbData)
-    {
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("people_count");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try
-                {
-                    double fnbCurrentCapacity = snapshot.child(FNBEstablishment.this.name).child("currentCapacity").getValue(Double.class);
-                    System.out.println(FNBEstablishment.this.name + fnbCurrentCapacity);
-                    fnbData.onDataReceived(fnbCurrentCapacity);
-                }
-                catch (NullPointerException e)
-                {
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }*/
+   
 
 //Future Improvements: (If we not lazy)
 // does not account for specific dates closed
