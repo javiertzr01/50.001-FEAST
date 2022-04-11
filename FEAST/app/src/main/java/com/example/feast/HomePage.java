@@ -42,29 +42,6 @@ public class HomePage extends AppCompatActivity {
         //singleton
         CreateEstablishments.getInstance();
         fnbList = CreateEstablishments.getList();
-        final DatabaseReference db = FirebaseDatabase.getInstance().getReference("people_count");
-        db.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (FNBEstablishment fnb : fnbList) {
-                    try {
-                        fnb.crowdLevel.setCurrentCapacity(snapshot, fnb);
-                        fnb.crowdLevel.setCrowdPercentage(fnb);
-                        fnb.crowdLevel.setWaitingTime();
-                        System.out.println(fnb.name + fnb.crowdLevel.getCurrentCapacity());
-                        finish();
-                        startActivity(getIntent());
-                    } catch (NullPointerException e) {
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         //TODO: choose sorting method
         //get the comparator
