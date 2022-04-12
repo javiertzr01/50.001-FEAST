@@ -169,7 +169,6 @@ public class CanteenPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
                 intent.putExtra("canteenStallName", "Western Food");
-                intent.putExtra("canteenStallName", "Indian Food");
                 intent.putExtra("isOpen", isOpen);
                 intent.putExtra("waitingTime", waitingTime);
                 intent.putExtra("capacity", capacity);
@@ -189,7 +188,6 @@ public class CanteenPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
                 intent.putExtra("canteenStallName", "Healthy Soup");
-                intent.putExtra("canteenStallName", "Indian Food");
                 intent.putExtra("isOpen", isOpen);
                 intent.putExtra("waitingTime", waitingTime);
                 intent.putExtra("capacity", capacity);
@@ -209,7 +207,6 @@ public class CanteenPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
                 intent.putExtra("canteenStallName", "Japanese & Korean Food");
-                intent.putExtra("canteenStallName", "Indian Food");
                 intent.putExtra("isOpen", isOpen);
                 intent.putExtra("waitingTime", waitingTime);
                 intent.putExtra("capacity", capacity);
@@ -229,7 +226,6 @@ public class CanteenPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
                 intent.putExtra("canteenStallName", "Economic Rice");
-                intent.putExtra("canteenStallName", "Indian Food");
                 intent.putExtra("isOpen", isOpen);
                 intent.putExtra("waitingTime", waitingTime);
                 intent.putExtra("capacity", capacity);
@@ -249,7 +245,6 @@ public class CanteenPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
                 intent.putExtra("canteenStallName", "Drinks & Snacks");
-                intent.putExtra("canteenStallName", "Indian Food");
                 intent.putExtra("isOpen", isOpen);
                 intent.putExtra("waitingTime", waitingTime);
                 intent.putExtra("capacity", capacity);
