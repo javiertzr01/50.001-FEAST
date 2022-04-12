@@ -2,17 +2,10 @@ package com.example.feast;
 
 import android.os.Build;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.time.*;
-import java.util.HashMap;
 
 public class FNBEstablishment extends Location{
     private int maxCapacity;
@@ -131,37 +124,6 @@ public class FNBEstablishment extends Location{
         crowdLevel = new CrowdLevel();
         weeklyTracker = new WeeklyTracker();
 
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    FNBEstablishment(Integer maxCapacity, boolean isFavorite, boolean isHalal, String name, String openingHour, String closingHour, String description) //openingHour and closingHour must be in "hh:mm" format
-    {
-        this.maxCapacity = maxCapacity;
-        this.isFavorite = isFavorite;
-        this.isHalal = isHalal;
-        this.name = name;
-        this.description = description;
-        for (DayOfWeek d: DayOfWeek.values()){      //From Sunday to Saturday
-            daysOpen.put(d, true);
-        }
-        this.crowdLevel = new CrowdLevel();
-        this.weeklyTracker = new WeeklyTracker();
-
-        char[] openingHourCharArray = openingHour.toCharArray();
-        char[] openHourCharArray = {openingHourCharArray[0], openingHourCharArray[1]};
-        char[] openMinCharArray = {openingHourCharArray[3], openingHourCharArray[4]};
-        char[] openSecCharArray = {openingHourCharArray[6], openingHourCharArray[7]};
-        this.openHour = String.valueOf(openHourCharArray);
-        this.openMin = String.valueOf(openMinCharArray);
-        this.openSec = String.valueOf(openSecCharArray);
-
-        char[] closingHourCharArray = closingHour.toCharArray();
-        char[] closeHourCharArray = {closingHourCharArray[0], closingHourCharArray[1]};
-        char[] closeMinCharArray = {closingHourCharArray[3], closingHourCharArray[4]};
-        char[] closeSecCharArray = {closingHourCharArray[6], closingHourCharArray[7]};
-        this.closeHour = String.valueOf(closeHourCharArray);
-        this.closeMin = String.valueOf(closeMinCharArray);
-        this.closeSec = String.valueOf(closeSecCharArray);
     }
 
     public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }

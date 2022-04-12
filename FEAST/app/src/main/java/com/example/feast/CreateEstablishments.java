@@ -19,7 +19,7 @@ public class CreateEstablishments {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private CreateEstablishments() {
-        canteen = new FNBEstablishment.FNBBuilder().setMaxCapacity(200).setFavorite(false).setHalal(true).setName("Canteen").setOpeningHour("08:00:00").setClosingHour("19:30:00").setDescription("PlaceHolder").build();
+        canteen = new FNBEstablishment.FNBBuilder().setMaxCapacity(4).setFavorite(false).setHalal(true).setName("Canteen").setOpeningHour("08:00:00").setClosingHour("19:30:00").setDescription("PlaceHolder").build();
         // canteen = new FNBEstablishment(200, false, true, "Canteen", "08:00:00", "19:30:00", "place");
         fnbList.add(canteen);
         dStar = new FNBEstablishment.FNBBuilder().setMaxCapacity(60).setFavorite(false).setHalal(false).setName("D'Star Bistro").setOpeningHour("10:30:00").setClosingHour("22:30:00").setDescription("PlaceHolder").build();
