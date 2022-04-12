@@ -20,9 +20,7 @@ import java.util.Set;
 
 public class CanteenInfoPage extends AppCompatActivity {
 
-    private final String sharedPrefFile = "com.example.android.mainsharedprefs";
-    private SharedPreferences mPreferences;
-    Set<String> favList;
+
 
     @Override
     public <T extends View> T findViewById(int id) {
@@ -98,22 +96,7 @@ public class CanteenInfoPage extends AppCompatActivity {
         ImageView mRestaurantImage = findViewById(R.id.restaurantImage);    //Init restaurant image
         mRestaurantImage.setImageResource(R.drawable.canteen);
 
-        // favourites button
-        mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
-        favList = mPreferences.getStringSet("favourites", Collections.emptySet());
-        Switch favouriteSwitch = findViewById(R.id.favouriteSwitch); //init Switch widget
-        favouriteSwitch.setChecked(favList.contains("Canteen")); //set current value based on saved preferences
-        favouriteSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (favouriteSwitch.isChecked()){
-                    favList.add("Canteen"); //add favourite
-                }
-                else{
-                    favList.remove("Canteen"); //remove favourite
-                }
-            }
-        });
+
 
         // TODO
         String menu = intent.getStringExtra("menu");    //get intent
@@ -131,12 +114,5 @@ public class CanteenInfoPage extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.clear();
-        preferenceEditor.putStringSet("favourites",favList);
-        preferenceEditor.apply();
-    }
+
 }

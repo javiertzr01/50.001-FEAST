@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Collections;
+import java.util.Set;
+
 
 public class CanteenPage extends AppCompatActivity {
     Button historical_trendButton;
@@ -26,6 +30,9 @@ public class CanteenPage extends AppCompatActivity {
     Button economy_riceButton;
     Button drinks_snacksButton;
     ImageButton backButton;
+    private final String sharedPrefFile = "com.example.android.mainsharedprefs";
+    private SharedPreferences mPreferences;
+    Set<String> favList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,8 +111,23 @@ public class CanteenPage extends AppCompatActivity {
         });
 
         //favourites switch
-        Switch favourite_switch = (Switch) findViewById(R.id.favourite_switch);
-
+        mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        favList = mPreferences.getStringSet("favourites", Collections.emptySet());
+        Switch favouriteSwitch = findViewById(R.id.favourite_switch); //init Switch widget
+        favouriteSwitch.setChecked(favList.contains("Canteen")); //set current value based on saved preferences
+        favouriteSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (favouriteSwitch.isChecked()){
+                    System.out.println("checked");
+                    favList.add("Canteen"); //add favourite
+                }
+                else{
+                    System.out.println("unchecked");
+                    favList.remove("Canteen"); //remove favourite
+                }
+            }
+        });
 
 
 
@@ -239,5 +261,14 @@ public class CanteenPage extends AppCompatActivity {
 //                startActivity(new Intent(getApplicationContext(),CanteenInfoPage.class));
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.clear();
+        preferenceEditor.putStringSet("favourites",favList);
+        preferenceEditor.apply();
     }
 }
