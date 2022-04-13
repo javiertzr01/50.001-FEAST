@@ -3,14 +3,20 @@ package com.example.feast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +37,7 @@ import java.util.Map;
 import java.util.Set;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class HomePage extends AppCompatActivity {
+public class HomePage extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     LinearLayout linearlayout; // declaration of the LinearLayout of activity_home_page.xml
     List<FNBEstablishment> fnbList;
     private final String sharedPrefFile = "com.example.android.mainsharedprefs";
@@ -43,6 +49,19 @@ public class HomePage extends AppCompatActivity {
         System.out.println("onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        // sets up the sorting selector dropdown (spinner) to be placed on the action bar/tool bar itself
+        getSupportActionBar().hide();
+        Spinner sorting_selector = findViewById(R.id.sorting_selector);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sorting_selector_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        sorting_selector.setAdapter(adapter);
+        sorting_selector.setOnItemSelectedListener(this);
+        // the method/code/logic to implement what happens when an item from the spinner is selected is below, onItemSelected
+
         ArrayList<FNBButton> fnbButtonArrayList = new ArrayList<>();
         linearlayout = findViewById(R.id.homePageLayout); // initialises the LinearLayout into linearlayout
 
@@ -126,6 +145,30 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
+    // TODO
+    // for the sorting selector drop down (spinner)
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+        String sortingMethod = parent.getItemAtPosition(position).toString();
+        Log.i("HomePage", "Sorting method: " + sortingMethod);
+
+        if (sortingMethod.equals("Sort by Favourites")){
+                Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
+                Collections.sort(fnbList, chosenComparator);
+        }
+
+        else if (sortingMethod.equals("Sort by Capacity")){
+            Comparator<CrowdLevel> chosenComparator = new CrowdLevelComparator();
+            // TODO
+            Collections.sort(fnbList, chosenComparator); // idk how to deal with this
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent){
+        // TODO
+        // probably need shared preference to see what was the last chosen sorting method from the previous time when the user was in the app
+    }
 
     @Override
     protected void onStart() {
