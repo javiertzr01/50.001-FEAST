@@ -63,8 +63,6 @@ public class OthersInfoPage extends AppCompatActivity {
         TextView halalCertificationTextView = findViewById(R.id.halalCertification);
         TextView isOpenTextView = findViewById(R.id.status_var_Text);
 
-//        mInfoRestaurant.setText(waitingTime + " " + capacity + "\n Opening Hours " + openHour + " - " + closeHour + isHalal);
-
         isOpenTextView.setText(isOpen);
 
         // sets the colour of the isOpenTextView

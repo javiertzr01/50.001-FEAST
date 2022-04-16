@@ -201,6 +201,9 @@ public class FNBButton extends ConstraintLayout{
         this.isFavourite = favouriteOrNot;
     }
 
+
+
+    // want to delete? - Javier
     // to make the FNBButton object be able to be passed into the implicit intents
     // ignore for now, can leave this as a legacy or something lol - Fuo En
 //    @RequiresApi(api = Build.VERSION_CODES.Q)

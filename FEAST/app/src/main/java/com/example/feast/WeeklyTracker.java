@@ -38,7 +38,6 @@ public class WeeklyTracker{
                 if (Arrays.asList(dbDayReference).contains(dsChild.getKey())) {
                     for (DataSnapshot dayChild : dsChild.getChildren())
                     {
-                        //System.out.println(dsChild.getKey());
                         hourlyMaxCap.add(dayChild.getValue(Integer.class));
                     }
                     weeklyTrackerTable.put(dsChild.getKey(), hourlyMaxCap);

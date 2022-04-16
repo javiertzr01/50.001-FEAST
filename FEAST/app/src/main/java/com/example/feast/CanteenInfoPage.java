@@ -43,7 +43,6 @@ public class CanteenInfoPage extends AppCompatActivity {
 
         String waitingTime = intent.getStringExtra("waitingTime");  //get intent
         String capacity = intent.getStringExtra("capacity");
-//        boolean isHalal = intent.getBooleanExtra("isHalal", false);
         String openHour = intent.getStringExtra("openHour");
         String closeHour = intent.getStringExtra("closeHour");
         String openMin = intent.getStringExtra("openMin");
@@ -57,7 +56,6 @@ public class CanteenInfoPage extends AppCompatActivity {
         TextView openMinTextView = findViewById(R.id.openMin);
         TextView closeMinTextView = findViewById(R.id.closeMin);
         TextView isOpenTextView = findViewById(R.id.status_var_Text);
-//        mInfoRestaurant.setText(waitingTime + " " + capacity + "\n Opening Hours " + openHour + " - " + closeHour);
 
         isOpenTextView.setText(isOpen);
 
