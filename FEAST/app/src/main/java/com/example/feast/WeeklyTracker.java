@@ -5,10 +5,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.GenericTypeIndicator;
 
-import java.time.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -38,7 +35,6 @@ public class WeeklyTracker{
                 if (Arrays.asList(dbDayReference).contains(dsChild.getKey())) {
                     for (DataSnapshot dayChild : dsChild.getChildren())
                     {
-                        //System.out.println(dsChild.getKey());
                         hourlyMaxCap.add(dayChild.getValue(Integer.class));
                     }
                     weeklyTrackerTable.put(dsChild.getKey(), hourlyMaxCap);

@@ -15,20 +15,18 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.Collections;
 import java.util.Set;
 
 
 public class CanteenPage extends AppCompatActivity {
-    Button historical_trendButton;
-    Button indian_foodButton;
-    Button western_foodButton;
-    Button healthy_soupButton;
-    Button japanese_korean_foodButton;
-    Button economy_riceButton;
-    Button drinks_snacksButton;
+    Button historicalTrendButton;
+    Button indianFoodButton;
+    Button westernFoodButton;
+    Button healthySoupButton;
+    Button japaneseKoreanFoodButton;
+    Button economyRiceButton;
+    Button drinksSnacksButton;
     ImageButton backButton;
     private final String sharedPrefFile = "com.example.android.mainsharedprefs";
     private SharedPreferences mPreferences;
@@ -50,10 +48,6 @@ public class CanteenPage extends AppCompatActivity {
         TextView capacity_str = findViewById(R.id.capacity);
         String capacity = intent.getStringExtra("capacity");
         capacity_str.setText(capacity);
-
-//        TextView statusText = findViewById(R.id.statusText);
-//        String isOpen = intent.getStringExtra("isOpen");
-//        statusText.setText(isOpen);
 
         String isOpen = intent.getStringExtra("isOpen");
         TextView status_var_text = findViewById(R.id.status_var_Text);
@@ -85,7 +79,6 @@ public class CanteenPage extends AppCompatActivity {
             capacity_str.setTextColor(Color.parseColor("#FF0000")); // sets the color of the capacity TextView to Red (#FF0000)
         }
 
-//        TextView openingHours = findViewById(R.id.openingHours);
         TextView openHour_str = findViewById(R.id.openHour);
         TextView openMin_str = findViewById(R.id.openMin);
         TextView closeHour_str = findViewById(R.id.closeHour);
@@ -98,7 +91,6 @@ public class CanteenPage extends AppCompatActivity {
         openMin_str.setText(openMin);
         closeHour_str.setText(closeHour);
         closeMin_str.setText(closeMin);
-//        openingHours.setText(openHour + " - " + closeHour);
 
         //back button
         backButton = findViewById(R.id.backButton);
@@ -132,9 +124,10 @@ public class CanteenPage extends AppCompatActivity {
 
 
 
-        //historical trend --> not sure about this one
-        historical_trendButton = findViewById(R.id.historical_trendButton);
-        historical_trendButton.setOnClickListener(new View.OnClickListener() {
+        // TODO?
+        // historical trend --> not sure about this one
+        historicalTrendButton = findViewById(R.id.historical_trendButton);
+        historicalTrendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(getApplicationContext.(),CrowdLevel.class));
@@ -142,10 +135,10 @@ public class CanteenPage extends AppCompatActivity {
         });
 
 
-        //All the stall buttons need to check on what each individual info page is called
-        //indian food
-        indian_foodButton = findViewById(R.id.indian_foodButton);
-        indian_foodButton.setOnClickListener(new View.OnClickListener() {
+        // All the stall buttons need to check on what each individual info page is called
+        // indian food
+        indianFoodButton = findViewById(R.id.indian_foodButton);
+        indianFoodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
@@ -158,13 +151,12 @@ public class CanteenPage extends AppCompatActivity {
                 intent.putExtra("closeHour", closeHour);
                 intent.putExtra("closeMin", closeMin);
                 startActivity(intent);
-//                startActivity(new Intent(getApplicationContext(),CanteenInfoPage.class));
             }
         });
 
         //western
-        western_foodButton = findViewById(R.id.western_foodButton);
-        western_foodButton.setOnClickListener(new View.OnClickListener() {
+        westernFoodButton = findViewById(R.id.western_foodButton);
+        westernFoodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
@@ -177,13 +169,12 @@ public class CanteenPage extends AppCompatActivity {
                 intent.putExtra("closeHour", closeHour);
                 intent.putExtra("closeMin", closeMin);
                 startActivity(intent);
-//                startActivity(new Intent(getApplicationContext(),CanteenInfoPage.class));
             }
         });
 
         //healthy soup
-        healthy_soupButton = findViewById(R.id.healthy_soupButton);
-        healthy_soupButton.setOnClickListener(new View.OnClickListener() {
+        healthySoupButton = findViewById(R.id.healthy_soupButton);
+        healthySoupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
@@ -196,13 +187,12 @@ public class CanteenPage extends AppCompatActivity {
                 intent.putExtra("closeHour", closeHour);
                 intent.putExtra("closeMin", closeMin);
                 startActivity(intent);
-//                startActivity(new Intent(getApplicationContext(),CanteenInfoPage.class));
             }
         });
 
         //japanese&korean
-        japanese_korean_foodButton = findViewById(R.id.japanese_korean_foodButton);
-        japanese_korean_foodButton.setOnClickListener(new View.OnClickListener() {
+        japaneseKoreanFoodButton = findViewById(R.id.japanese_korean_foodButton);
+        japaneseKoreanFoodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
@@ -215,13 +205,12 @@ public class CanteenPage extends AppCompatActivity {
                 intent.putExtra("closeHour", closeHour);
                 intent.putExtra("closeMin", closeMin);
                 startActivity(intent);
-//                startActivity(new Intent(getApplicationContext(),CanteenInfoPage.class));
             }
         });
 
         //caifan
-        economy_riceButton = findViewById(R.id.economy_riceButton);
-        economy_riceButton.setOnClickListener(new View.OnClickListener() {
+        economyRiceButton = findViewById(R.id.economy_riceButton);
+        economyRiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
@@ -234,13 +223,12 @@ public class CanteenPage extends AppCompatActivity {
                 intent.putExtra("closeHour", closeHour);
                 intent.putExtra("closeMin", closeMin);
                 startActivity(intent);
-//                startActivity(new Intent(getApplicationContext(),CanteenInfoPage.class));
             }
         });
 
         //drinks&snacks
-        drinks_snacksButton = findViewById(R.id.drinks_snacksButton);
-        drinks_snacksButton.setOnClickListener(new View.OnClickListener() {
+        drinksSnacksButton = findViewById(R.id.drinks_snacksButton);
+        drinksSnacksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CanteenPage.this, CanteenInfoPage.class);
@@ -253,7 +241,6 @@ public class CanteenPage extends AppCompatActivity {
                 intent.putExtra("closeHour", closeHour);
                 intent.putExtra("closeMin", closeMin);
                 startActivity(intent);
-//                startActivity(new Intent(getApplicationContext(),CanteenInfoPage.class));
             }
         });
     }

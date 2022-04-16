@@ -14,9 +14,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.Collections;
 import java.util.Set;
@@ -62,8 +59,6 @@ public class OthersInfoPage extends AppCompatActivity {
         TextView closeMinTextView = findViewById(R.id.closeMin);
         TextView halalCertificationTextView = findViewById(R.id.halalCertification);
         TextView isOpenTextView = findViewById(R.id.status_var_Text);
-
-//        mInfoRestaurant.setText(waitingTime + " " + capacity + "\n Opening Hours " + openHour + " - " + closeHour + isHalal);
 
         isOpenTextView.setText(isOpen);
 

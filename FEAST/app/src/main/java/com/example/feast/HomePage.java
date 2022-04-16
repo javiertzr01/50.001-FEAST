@@ -3,22 +3,17 @@ package com.example.feast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,14 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -46,7 +37,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
@@ -68,7 +58,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         // data persistence
         mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         favList = mPreferences.getStringSet("favourites", Collections.emptySet());
-        System.out.println(favList);
 
         //singleton
         CreateEstablishments.getInstance();
@@ -77,20 +66,17 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
 
 
         // sort by
-        //TODO: choose sorting method
         Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
         Collections.sort(fnbList, chosenComparator); // order fnb establishments based on isFavorite, then chosen sorting method
 
         // creating fnbButton
         for (FNBEstablishment est : fnbList) {
-            System.out.println(est.getIsFavorite());
             FNBButton fnbButton = new FNBButton(this);
             TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
             fnbButton.setFNBEstablishmentName(est.name);
             fnbButton.setIsOpen(est.isOpen());
             fnbButton.setCapacity(est.crowdLevel.getCurrentCrowdLevelString(), est.crowdLevel.crowdPercentage);
             fnbButton.setWaitingTime(String.valueOf(est.crowdLevel.currentCrowdLevel));
-
             fnbButton.setIsFavourite(est.getIsFavorite());
 
             emptySpace.setTextSize(5);
@@ -106,9 +92,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             } else {
                 setGoToOthersInfoPage(fnbButton, est);
             }
-
-
-
         }
 
         TextView lastEmptySpace = new TextView(this); // for the empty space below the last FNB Button
@@ -139,9 +122,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 
@@ -150,17 +131,19 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
         String sortingMethod = parent.getItemAtPosition(position).toString();
-        Log.i("HomePage", "Sorting method: " + sortingMethod);
 
         if (sortingMethod.equals("Sort by Favourites")){
-                Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
-                Collections.sort(fnbList, chosenComparator);
+            Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
+            Collections.sort(fnbList, chosenComparator);
+            // TODO
+            // Refresh the fnbButtons if current sorting method != "Sort by Favourites"
         }
 
         else if (sortingMethod.equals("Sort by Capacity")){
-            Comparator<CrowdLevel> chosenComparator = new CrowdLevelComparator();
+            Comparator<FNBEstablishment> chosenComparator = new CrowdLevelComparator();
+            Collections.sort(fnbList, chosenComparator);
             // TODO
-            Collections.sort(fnbList, chosenComparator); // idk how to deal with this
+            // Refresh the fnbButtons if current sorting method != "Sort by Capacity"
         }
     }
 
@@ -173,19 +156,16 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("HomePage", "onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("HomePage", "onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i("HomePage", "onPause");
         SharedPreferences.Editor preferenceEditor = mPreferences.edit();
         preferenceEditor.clear();
         preferenceEditor.putStringSet("favourites",favList);
@@ -195,19 +175,16 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("HomePage", "onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i("HomePage", "onDestroy");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i("HomePage", "onRestart");
     }
 
     // a bunch of helper methods below
@@ -305,7 +282,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         intent.putExtra("closeSec", est.closeSec);
         intent.putExtra("description", est.description);
         // put the menu and prices into the intent
-        // put the waiting time into the intent
         startActivity(intent);
     }
 
@@ -358,7 +334,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void onClick(View view) {
                 // TODO
-                //goToHistoricTrendsPage(view);
+                // goToHistoricTrendsPage(view);
             }
         });
 
@@ -366,7 +342,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void onClick(View view) {
                 // TODO
-                //goToHistoricTrendsPage(view);
+                // goToHistoricTrendsPage(view);
             }
         });
 
@@ -401,7 +377,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         intent.putExtra("closeSec", est.closeSec);
         intent.putExtra("description", est.description);
         // put the menu and prices into the intent
-        // put the waiting time into the intent
         startActivity(intent);
     }
 }

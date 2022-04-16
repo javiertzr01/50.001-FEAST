@@ -2,16 +2,15 @@ package com.example.feast;
 
 import java.util.Comparator;
 
-public class CrowdLevelComparator implements Comparator<CrowdLevel> {
-
-    public int compare(CrowdLevel crowdLevel1, CrowdLevel crowdLevel2)
+public class CrowdLevelComparator implements Comparator<FNBEstablishment> {
+    public int compare(FNBEstablishment fnb1, FNBEstablishment fnb2)
     {
 
-        if (crowdLevel1.getCurrentCrowdLevelInteger() > crowdLevel2.getCurrentCrowdLevelInteger())
+        if (fnb1.crowdLevel.getCurrentCrowdLevelInteger() > fnb2.crowdLevel.getCurrentCrowdLevelInteger())
         {
             return 1;
         }
-        else if (crowdLevel1.getCurrentCrowdLevelInteger().equals(crowdLevel2.getCurrentCrowdLevelInteger()))
+        else if (fnb1.crowdLevel.getCurrentCrowdLevelInteger().equals(fnb2.crowdLevel.getCurrentCrowdLevelInteger()))
         {
             return 0;
         }

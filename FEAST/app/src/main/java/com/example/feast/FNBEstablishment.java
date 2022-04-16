@@ -4,7 +4,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-
 import java.time.*;
 
 public class FNBEstablishment extends Location{
@@ -126,11 +125,11 @@ public class FNBEstablishment extends Location{
 
     }
 
-    public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }
+    //public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }
 
     public int getMaxCapacity() { return this.maxCapacity; }
 
-    public void invIsFavorite(boolean isFavorite) { this.isFavorite = !this.isFavorite; }
+    //public void invIsFavorite(boolean isFavorite) { this.isFavorite = !this.isFavorite; }
 
     public void setIsFavorite(boolean favorite) {
         isFavorite = favorite;
@@ -139,9 +138,4 @@ public class FNBEstablishment extends Location{
     public boolean getIsFavorite() { return this.isFavorite; }
 
     public boolean getIsHalal(){return this.isHalal;}
-   
-
-//Future Improvements: (If we not lazy)
-// does not account for specific dates closed
-// does not account for different closing times on different days
 }

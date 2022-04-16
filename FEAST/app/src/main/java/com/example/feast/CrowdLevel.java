@@ -5,10 +5,6 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-
-import java.time.*;
-import java.util.HashMap;
 
 public class CrowdLevel{
 
