@@ -15,8 +15,6 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.Collections;
 import java.util.Set;
 
