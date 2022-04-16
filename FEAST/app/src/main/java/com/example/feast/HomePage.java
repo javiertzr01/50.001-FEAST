@@ -80,7 +80,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
 
         // creating fnbButton
         for (FNBEstablishment est : fnbList) {
-            //System.out.println(est.getIsFavorite());
             FNBButton fnbButton = new FNBButton(this);
             TextView emptySpace = new TextView(this); // for the empty space between each FNBButton instance
             fnbButton.setFNBEstablishmentName(est.name);
@@ -141,7 +140,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
         String sortingMethod = parent.getItemAtPosition(position).toString();
-        Log.i("HomePage", "Sorting method: " + sortingMethod);
 
         if (sortingMethod.equals("Sort by Favourites")){
             Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
