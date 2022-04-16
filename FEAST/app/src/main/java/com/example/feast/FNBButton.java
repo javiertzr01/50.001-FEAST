@@ -1,22 +1,13 @@
 package com.example.feast;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Build;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import java.util.ArrayList;
 
 public class FNBButton extends ConstraintLayout{
     // all the variable data fields/images will be here as attributes of the FNBButton class

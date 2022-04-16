@@ -1,10 +1,7 @@
 package com.example.feast;
 
 import android.os.Build;
-
 import androidx.annotation.RequiresApi;
-
-
 import java.time.*;
 
 public class FNBEstablishment extends Location{
