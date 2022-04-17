@@ -13,36 +13,32 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CanteenInfoPage extends AppCompatActivity {
-
-
-
     @Override
     public <T extends View> T findViewById(int id) {
         return super.findViewById(id);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_others_info_page);
+        setContentView(R.layout.activity_canteen_info_page);
 
+        getSupportActionBar().hide();
         Intent intent = getIntent();    //Init intent
 
-        String stallName = intent.getStringExtra("canteenStallName");   //TODO change intent to canteen stall intent
-        TextView mInfoRestaurantName = findViewById(R.id.infoRestaurantName);  //Init restaurant name
-        mInfoRestaurantName.setText("Canteen:\n" + stallName);
-
-        TextView fnbEstablishmentName = findViewById(R.id.fnbEstablishmentName);
-        fnbEstablishmentName.setText("");
-
-        String waitingTime = intent.getStringExtra("waitingTime");  //get intent
+        // get values from intent
+        String canteenStallName = intent.getStringExtra("canteenStallName");
+        String waitingTime = intent.getStringExtra("waitingTime");
         String capacity = intent.getStringExtra("capacity");
         String openHour = intent.getStringExtra("openHour");
         String closeHour = intent.getStringExtra("closeHour");
         String openMin = intent.getStringExtra("openMin");
         String closeMin = intent.getStringExtra("closeMin");
         String isOpen = intent.getStringExtra("isOpen");
-        TextView mInfoRestaurant = findViewById(R.id.infoRestaurant);   //Init restaurant info
+
+        // get the widgets
+        TextView canteenStallNameTextView = findViewById(R.id.canteenStallName);
         TextView waitingTimeTextView = findViewById(R.id.waitingTime);
         TextView capacityTextView = findViewById(R.id.capacity);
         TextView openHourTextView = findViewById(R.id.openHour);
@@ -51,44 +47,67 @@ public class CanteenInfoPage extends AppCompatActivity {
         TextView closeMinTextView = findViewById(R.id.closeMin);
         TextView isOpenTextView = findViewById(R.id.status_var_Text);
 
+        canteenStallNameTextView.setText("Canteen: " + canteenStallName);
         isOpenTextView.setText(isOpen);
 
         // sets the colour of the isOpenTextView
         if (isOpen.contains("Open")){
-            isOpenTextView.setTextColor(Color.parseColor("#008000")); // sets the color of the capacity TextView to Green (#008000)
+            isOpenTextView.setTextColor(getResources().getColor(R.color.green, null));
         }
 
         else if (isOpen.contains("Closed")){
-            isOpenTextView.setTextColor(Color.parseColor("#FF0000")); // sets the color of the capacity TextView to Red (#FF0000)
+            isOpenTextView.setTextColor(getResources().getColor(R.color.red, null));
         }
 
         // sets the colour of the capacityTextView
         if (capacity.contains("Not Crowded")){
-            capacityTextView.setTextColor(Color.parseColor("#008000")); // sets the color of the capacity TextView to Green (#008000)
+            capacityTextView.setTextColor(getResources().getColor(R.color.green, null));
         }
 
         else if (capacity.contains("Crowded")){
-            capacityTextView.setTextColor(Color.parseColor("#FFA500")); // sets the color of the capacity TextView to Orange (#FFA500)
+            capacityTextView.setTextColor(getResources().getColor(R.color.orange, null));
         }
 
         else if (capacity.contains("Very Crowded")){
-            capacityTextView.setTextColor(Color.parseColor("#FF8C00")); // sets the color of the capacity TextView to Dark Orange (#FF8C00)
+            capacityTextView.setTextColor(getResources().getColor(R.color.dark_orange, null));
         }
 
         else if (capacity.contains("Full")){
-            capacityTextView.setTextColor(Color.parseColor("#FF0000")); // sets the color of the capacity TextView to Red (#FF0000)
+            capacityTextView.setTextColor(getResources().getColor(R.color.red, null));
         }
 
-        waitingTimeTextView.setText(waitingTime);
+        waitingTimeTextView.setText(waitingTime + " min");
         openHourTextView.setText(openHour);
         closeHourTextView.setText(closeHour);
         openMinTextView.setText(openMin);
         closeMinTextView.setText(closeMin);
 
-        ImageView mRestaurantImage = findViewById(R.id.restaurantImage);    //Init restaurant image
-        mRestaurantImage.setImageResource(R.drawable.canteen);
+        ImageView canteenStallImage = findViewById(R.id.canteenStallImage);
 
+        // sets the canteenStallImage to that representing the specific canteen stall based on the stallName passed on by the intent
+        if (canteenStallName.equals("Indian Food")){
+            canteenStallImage.setImageResource(R.drawable.indian_food);
+        }
 
+        else if (canteenStallName.equals("Western Food")){
+            canteenStallImage.setImageResource(R.drawable.western_food);
+        }
+
+        else if (canteenStallName.equals("Healthy Soup")){
+            canteenStallImage.setImageResource(R.drawable.healthy_soup);
+        }
+
+        else if (canteenStallName.equals("Japanese & Korean Food")){
+            canteenStallImage.setImageResource(R.drawable.japanese_and_korean_food);
+        }
+
+        else if (canteenStallName.equals("Economic Rice")){
+            canteenStallImage.setImageResource(R.drawable.economic_rice);
+        }
+
+        else if (canteenStallName.equals("Drinks & Snacks")){
+            canteenStallImage.setImageResource(R.drawable.drinks_and_snacks);
+        }
 
         // TODO
         String menu = intent.getStringExtra("menu");    //get intent
@@ -100,11 +119,16 @@ public class CanteenInfoPage extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), CanteenPage.class));     //TODO change to send back to canteen page
-
+                Intent intent = new Intent(CanteenInfoPage.this, CanteenPage. class);
+                intent.putExtra("isOpen", isOpen);
+                intent.putExtra("waitingTime", waitingTime);
+                intent.putExtra("capacity", capacity);
+                intent.putExtra("openHour", openHour);
+                intent.putExtra("openMin", openMin);
+                intent.putExtra("closeHour", closeHour);
+                intent.putExtra("closeMin", closeMin);
+                startActivity(intent);
             }
         });
     }
-
-
 }

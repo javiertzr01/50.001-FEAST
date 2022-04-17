@@ -18,9 +18,7 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.Set;
 
-
 public class CanteenPage extends AppCompatActivity {
-    Button historicalTrendButton;
     Button indianFoodButton;
     Button westernFoodButton;
     Button healthySoupButton;
@@ -32,61 +30,64 @@ public class CanteenPage extends AppCompatActivity {
     private SharedPreferences mPreferences;
     Set<String> favList;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_canteen);
+        setContentView(R.layout.activity_canteen_page);
 
         getSupportActionBar().hide();
         Intent intent = getIntent();
 
-        //get values
-        String waitingTime = intent.getStringExtra("waitingTime");  //get intent
-        TextView waitingTime_str = findViewById(R.id.waitingTime);
-        waitingTime_str.setText(waitingTime);
-
-        TextView capacity_str = findViewById(R.id.capacity);
+        //get values from intent
+        String waitingTime = intent.getStringExtra("waitingTime");
         String capacity = intent.getStringExtra("capacity");
-        capacity_str.setText(capacity);
-
         String isOpen = intent.getStringExtra("isOpen");
-        TextView status_var_text = findViewById(R.id.status_var_Text);
-        status_var_text.setText(isOpen);
-
-        // sets the colour of the isOpenTextView
-        if (isOpen.contains("Open")){
-            status_var_text.setTextColor(Color.parseColor("#008000")); // sets the color of the capacity TextView to Green (#008000)
-        }
-
-        else if (isOpen.contains("Closed")){
-            status_var_text.setTextColor(Color.parseColor("#FF0000")); // sets the color of the capacity TextView to Red (#FF0000)
-        }
-
-        // sets the colour of the capacity_str
-        if (capacity.contains("Not Crowded")){
-            capacity_str.setTextColor(Color.parseColor("#008000")); // sets the color of the capacity TextView to Green (#008000)
-        }
-
-        else if (capacity.contains("Crowded")){
-            capacity_str.setTextColor(Color.parseColor("#FFA500")); // sets the color of the capacity TextView to Orange (#FFA500)
-        }
-
-        else if (capacity.contains("Very Crowded")){
-            capacity_str.setTextColor(Color.parseColor("#FF8C00")); // sets the color of the capacity TextView to Dark Orange (#FF8C00)
-        }
-
-        else if (capacity.contains("Full")){
-            capacity_str.setTextColor(Color.parseColor("#FF0000")); // sets the color of the capacity TextView to Red (#FF0000)
-        }
-
-        TextView openHour_str = findViewById(R.id.openHour);
-        TextView openMin_str = findViewById(R.id.openMin);
-        TextView closeHour_str = findViewById(R.id.closeHour);
-        TextView closeMin_str = findViewById(R.id.closeMin);
         String openHour = intent.getStringExtra("openHour");
         String openMin = intent.getStringExtra("openMin");
         String closeHour = intent.getStringExtra("closeHour");
         String closeMin = intent.getStringExtra("closeMin");
+
+        // get the widgets
+        TextView waitingTimeTextView = findViewById(R.id.waitingTime);
+        TextView capacityTextView = findViewById(R.id.capacity);
+        TextView isOpenTextView = findViewById(R.id.isOpen);
+        TextView openHour_str = findViewById(R.id.openHour);
+        TextView openMin_str = findViewById(R.id.openMin);
+        TextView closeHour_str = findViewById(R.id.closeHour);
+        TextView closeMin_str = findViewById(R.id.closeMin);
+
+        isOpenTextView.setText(isOpen);
+
+        // sets the colour of the isOpenTextView
+        if (isOpen.contains("Open")){
+            isOpenTextView.setTextColor(getResources().getColor(R.color.green, null));
+        }
+
+        else if (isOpen.contains("Closed")){
+            isOpenTextView.setTextColor(getResources().getColor(R.color.red, null));
+        }
+
+        capacityTextView.setText(capacity);
+
+        // sets the colour of the capacityTextView
+        if (capacity.contains("Not Crowded")){
+            capacityTextView.setTextColor(getResources().getColor(R.color.green, null));
+        }
+
+        else if (capacity.contains("Crowded")){
+            capacityTextView.setTextColor(getResources().getColor(R.color.orange, null));
+        }
+
+        else if (capacity.contains("Very Crowded")){
+            capacityTextView.setTextColor(getResources().getColor(R.color.dark_orange, null));
+        }
+
+        else if (capacity.contains("Full")){
+            capacityTextView.setTextColor(getResources().getColor(R.color.red, null));
+        }
+
+        waitingTimeTextView.setText(waitingTime + " min");
         openHour_str.setText(openHour);
         openMin_str.setText(openMin);
         closeHour_str.setText(closeHour);
@@ -120,20 +121,6 @@ public class CanteenPage extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-        // TODO?
-        // historical trend --> not sure about this one
-        historicalTrendButton = findViewById(R.id.historical_trendButton);
-        historicalTrendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //startActivity(new Intent(getApplicationContext.(),CrowdLevel.class));
-            }
-        });
-
 
         // All the stall buttons need to check on what each individual info page is called
         // indian food

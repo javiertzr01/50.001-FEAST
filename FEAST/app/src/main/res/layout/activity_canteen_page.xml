@@ -6,34 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CanteenPage"
+    android:background="@color/white"
     android:backgroundTint="@color/white">
 
     <include layout="@layout/content_canteen" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_width="411dp"
+        android:layout_height="62dp"
         android:background="@color/white"
         app:layout_anchor="@+id/toolbar"
         app:layout_anchorGravity="top"
         app:title="Canteen"
-        app:titleMarginStart="70dp"
+        app:titleMarginStart="50dp"
         app:titleTextColor="@color/feast_blue" />
 
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="51dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="7dp"
+        android:layout_height="59dp"
         android:backgroundTint="@color/white"
         android:contentDescription="Image Button for Back"
         android:minWidth="32dp"
         android:minHeight="48dp"
         app:layout_anchor="@+id/backButton"
         app:layout_anchorGravity="end|center"
-        app:srcCompat="@drawable/ic_baseline_arrow_back"
-        app:tint="@color/feast_blue" />
+        app:srcCompat="@drawable/ic_baseline_arrow_back" />
 
     <Switch
         android:id="@+id/favourite_switch"

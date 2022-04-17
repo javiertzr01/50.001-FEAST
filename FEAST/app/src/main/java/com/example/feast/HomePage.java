@@ -234,22 +234,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
-        fnbButton.getHistoricalTrendPhoto().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO
-                //goToHistoricTrendsPage(view);
-            }
-        });
-
-        fnbButton.getHistoryText().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO
-                //goToHistoricTrendsPage(view);
-            }
-        });
-
         fnbButton.getWaitingTimePhoto().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -327,22 +311,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void onClick(View view) {
                 goToCanteenPage(view, fnbButton, est);
-            }
-        });
-
-        fnbButton.getHistoricalTrendPhoto().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO
-                // goToHistoricTrendsPage(view);
-            }
-        });
-
-        fnbButton.getHistoryText().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO
-                // goToHistoricTrendsPage(view);
             }
         });
 
