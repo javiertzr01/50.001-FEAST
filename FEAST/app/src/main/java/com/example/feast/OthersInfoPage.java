@@ -3,13 +3,12 @@ package com.example.feast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -29,19 +28,19 @@ public class OthersInfoPage extends AppCompatActivity {
         return super.findViewById(id);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_others_info_page);
 
+        getSupportActionBar().hide();
         Intent intent = getIntent();    //Init intent
 
-        String restaurantName = intent.getStringExtra("fnbEstablishmentName");  //get intent
-
-        TextView mInfoRestaurantName = findViewById(R.id.infoRestaurantName);  //Init restaurant name
-        mInfoRestaurantName.setText(restaurantName);
-
-        String waitingTime = intent.getStringExtra("waitingTime");  //get intent
+        // get values from intent
+        String restaurantName = intent.getStringExtra("fnbEstablishmentName");
+        String waitingTime = intent.getStringExtra("waitingTime");
         String capacity = intent.getStringExtra("capacity");
         boolean isHalal = intent.getBooleanExtra("isHalal", false);
         String openHour = intent.getStringExtra("openHour");
@@ -49,8 +48,9 @@ public class OthersInfoPage extends AppCompatActivity {
         String openMin = intent.getStringExtra("openMin");
         String closeMin = intent.getStringExtra("closeMin");
         String isOpen = intent.getStringExtra("isOpen");
-        TextView mInfoRestaurant = findViewById(R.id.infoRestaurant);   //Init restaurant info
-        TextView fnbEstablishmentNameTextView = findViewById(R.id.fnbEstablishmentName);
+
+        // get the widgets
+        TextView restaurantNameTextView = findViewById(R.id.restaurantName);
         TextView capacityTextView = findViewById(R.id.capacity);
         TextView waitingTimeTextView = findViewById(R.id.waitingTime);
         TextView openHourTextView = findViewById(R.id.openHour);
@@ -60,39 +60,38 @@ public class OthersInfoPage extends AppCompatActivity {
         TextView halalCertificationTextView = findViewById(R.id.halalCertification);
         TextView isOpenTextView = findViewById(R.id.status_var_Text);
 
+        restaurantNameTextView.setText(restaurantName);
         isOpenTextView.setText(isOpen);
 
         // sets the colour of the isOpenTextView
         if (isOpen.contains("Open")){
-            isOpenTextView.setTextColor(Color.parseColor("#008000")); // sets the color of the capacity TextView to Green (#008000)
+            isOpenTextView.setTextColor(getResources().getColor(R.color.green, null));
         }
 
         else if (isOpen.contains("Closed")){
-            isOpenTextView.setTextColor(Color.parseColor("#FF0000")); // sets the color of the capacity TextView to Red (#FF0000)
+            isOpenTextView.setTextColor(getResources().getColor(R.color.red, null));
         }
-
-        fnbEstablishmentNameTextView.setText(restaurantName);
 
         capacityTextView.setText(capacity);
 
         // sets the colour of the capacityTextView
         if (capacity.contains("Not Crowded")){
-            capacityTextView.setTextColor(Color.parseColor("#008000")); // sets the color of the capacity TextView to Green (#008000)
+            capacityTextView.setTextColor(getResources().getColor(R.color.green, null));
         }
 
         else if (capacity.contains("Crowded")){
-            capacityTextView.setTextColor(Color.parseColor("#FFA500")); // sets the color of the capacity TextView to Orange (#FFA500)
+            capacityTextView.setTextColor(getResources().getColor(R.color.orange, null));
         }
 
         else if (capacity.contains("Very Crowded")){
-            capacityTextView.setTextColor(Color.parseColor("#FF8C00")); // sets the color of the capacity TextView to Dark Orange (#FF8C00)
+            capacityTextView.setTextColor(getResources().getColor(R.color.dark_orange, null));
         }
 
         else if (capacity.contains("Full")){
-            capacityTextView.setTextColor(Color.parseColor("#FF0000")); // sets the color of the capacity TextView to Red (#FF0000)
+            capacityTextView.setTextColor(getResources().getColor(R.color.red, null));
         }
 
-        waitingTimeTextView.setText(waitingTime);
+        waitingTimeTextView.setText(waitingTime + " min");
         openHourTextView.setText(openHour);
         closeHourTextView.setText(closeHour);
         openMinTextView.setText(openMin);
@@ -106,20 +105,26 @@ public class OthersInfoPage extends AppCompatActivity {
             halalCertificationTextView.setText("Non-Halal");
         }
 
-        ImageView mRestaurantImage = findViewById(R.id.restaurantImage);    //Init restaurant image
+        ImageView restaurantImage = findViewById(R.id.restaurantImage);    //Init restaurant image
         if (restaurantName.equals("Canteen")) {
-            mRestaurantImage.setImageResource(R.drawable.canteen); }
+            restaurantImage.setImageResource(R.drawable.canteen);
+        }
+
         else if (restaurantName.equals("D'Star Bistro")) {
-            mRestaurantImage.setImageResource(R.drawable.d_star_bistro); }
+            restaurantImage.setImageResource(R.drawable.d_star_bistro);
+        }
+
         else if (restaurantName.equals("Crooked Cooks")) {
-            mRestaurantImage.setImageResource(R.drawable.crooked_cooks); }
+            restaurantImage.setImageResource(R.drawable.crooked_cooks);
+
+        }
         else if (restaurantName.equals("Gomgom")) {
-            mRestaurantImage.setImageResource(R.drawable.gomgom); }
+            restaurantImage.setImageResource(R.drawable.gomgom);
+        }
+
         else if (restaurantName.equals("Simon's")) {
-            mRestaurantImage.setImageResource(R.drawable.simon); }
-
-        Button mViewHistTrendButton = findViewById(R.id.historical_trendButton);
-
+            restaurantImage.setImageResource(R.drawable.simon);
+        }
 
         // favourites button
         mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
@@ -132,12 +137,12 @@ public class OthersInfoPage extends AppCompatActivity {
                 if (favouriteSwitch.isChecked()){
                     favList.add(restaurantName); //add favourite
                 }
+
                 else{
                     favList.remove(restaurantName); //remove favourite
                 }
             }
         });
-
 
         String menu = intent.getStringExtra("menu");    //get intent
         TextView mInfoMenu = findViewById(R.id.infoMenu);   //Init menu
@@ -149,7 +154,6 @@ public class OthersInfoPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), HomePage.class));     //Send back to main page
-
             }
         });
     }
@@ -162,5 +166,4 @@ public class OthersInfoPage extends AppCompatActivity {
         preferenceEditor.putStringSet("favourites",favList);
         preferenceEditor.apply();
     }
-
 }

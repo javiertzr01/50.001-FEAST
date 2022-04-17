@@ -7,7 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="feast_blue">#4E60FF</color>\
-    <color name="green">#32CD32</color>
+    <color name="feast_blue">#4E60FF</color>
+    <color name="green">#008000</color>
     <color name="red">#FF0000</color>
+    <color name="grey">#83859C</color>
+    <color name="light_grey">#2683859C</color>
+    <color name="orange">#FFA500</color>
+    <color name="dark_orange">#FF8C00</color>
+    <color name="gold">#FFD700</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

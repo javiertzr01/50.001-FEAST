@@ -2,12 +2,14 @@ package com.example.feast;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class FNBButton extends ConstraintLayout{
@@ -22,8 +24,6 @@ public class FNBButton extends ConstraintLayout{
     private String isOpenString; // for the Parcelable
     private ImageView fnbPhoto; // for a picture of the F&B establishment, to grab the image from the database or from some website? Backend team to clarify
     private TextView dotText; // constant
-    private ImageView historicalTrendPhoto; // constant
-    private TextView historyText; // constant
     private ImageView waitingTimePhoto; // constant
     private Button favouriteIndicator; // to indicate whether the F&B establishment is a user's favourite
     private boolean isFavourite; // whether this particular F&B establishment is in the favourites or not
@@ -40,8 +40,6 @@ public class FNBButton extends ConstraintLayout{
         this.isOpen = view.findViewById(R.id.isOpen);
         this.fnbPhoto = view.findViewById(R.id.fnbPhoto);
         this.dotText = view.findViewById(R.id.dotText);
-        this.historicalTrendPhoto = view.findViewById(R.id.historicalTrendPhoto);
-        this.historyText = view.findViewById(R.id.historyText);
         this.waitingTimePhoto = view.findViewById(R.id.waitingTimePhoto);
         this.favouriteIndicator = view.findViewById(R.id.favouriteIndicator);
         this.fnbButton = view.findViewById(R.id.fnbButton);
@@ -70,14 +68,6 @@ public class FNBButton extends ConstraintLayout{
 
     public TextView getDotText() {
         return dotText;
-    }
-
-    public ImageView getHistoricalTrendPhoto() {
-        return historicalTrendPhoto;
-    }
-
-    public TextView getHistoryText() {
-        return historyText;
     }
 
     public ImageView getWaitingTimePhoto() {
@@ -137,26 +127,27 @@ public class FNBButton extends ConstraintLayout{
     }
 
     public void setWaitingTime(String waitingTime){
-        this.waitingTime.setText(waitingTime);
+        this.waitingTime.setText(waitingTime + " min");
         this.waitingTimeString = waitingTime;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setCapacity(String crowdLevel, double crowdPercentage) {
         switch(crowdLevel){
             case "Not Crowded":
-                this.capacity.setTextColor(Color.parseColor("#008000")); // sets the color of the capacity TextView to Green (#008000)
+                this.capacity.setTextColor(getResources().getColor(R.color.green, null));
                 break;
 
             case "Crowded":
-                this.capacity.setTextColor(Color.parseColor("#FFA500")); // sets the color of the capacity TextView to Orange (#FFA500)
+                this.capacity.setTextColor(getResources().getColor(R.color.orange, null));
                 break;
 
             case "Very Crowded":
-                this.capacity.setTextColor(Color.parseColor("#FF8C00")); // sets the color of the capacity TextView to Dark Orange (#FF8C00)
+                this.capacity.setTextColor(getResources().getColor(R.color.dark_orange, null));
                 break;
 
             case "Full":
-                this.capacity.setTextColor(Color.parseColor("#FF0000")); // sets the color of the capacity TextView to Red (#FF0000)
+                this.capacity.setTextColor(getResources().getColor(R.color.red, null));
                 break;
         }
 
@@ -168,76 +159,30 @@ public class FNBButton extends ConstraintLayout{
         this.capacityString = tempCapacity;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setIsOpen(String openStatus){
         if (openStatus.equals("Closed")){
-            this.isOpen.setTextColor(Color.parseColor("#FF0000")); // if the fnb establishment is closed, change the text colour to Red (#FF0000)
+            this.isOpen.setTextColor(getResources().getColor(R.color.red, null));
         }
 
         else{
-            this.isOpen.setTextColor(Color.parseColor("#008000")); // if the fnb establishment is open, change the text colour to Green (#008000)
+            this.isOpen.setTextColor(getResources().getColor(R.color.green, null));
         }
 
         this.isOpen.setText(openStatus);
         this.isOpenString = openStatus;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setIsFavourite(boolean favouriteOrNot){
         if (favouriteOrNot){ // if the input value is true, meaning that this particular F&B establishment is in the user's favourites list
-            this.favouriteIndicator.setBackgroundColor(Color.parseColor("#FFD700")); // sets it to gold colour (#FFD700)
+            this.favouriteIndicator.setBackgroundColor(getResources().getColor(R.color.gold, null));
         }
 
         else{
-            this.favouriteIndicator.setBackgroundColor(Color.parseColor("#FFFFFF")); // sets it to white colour (#FFFFFF)
+            this.favouriteIndicator.setBackgroundColor(getResources().getColor(R.color.white, null));
         }
 
         this.isFavourite = favouriteOrNot;
     }
-
-
-
-    // want to delete? - Javier
-    // to make the FNBButton object be able to be passed into the implicit intents
-    // ignore for now, can leave this as a legacy or something lol - Fuo En
-//    @RequiresApi(api = Build.VERSION_CODES.Q)
-//    @Override
-//    public void writeToParcel(Parcel out, int flags){
-//        out.writeString(this.fnbEstablishmentName.getText().toString());
-//        out.writeString(this.waitingTime.getText().toString());
-//        out.writeString(this.capacity.getText().toString());
-//        out.writeString(this.isOpen.getText().toString());
-//        out.writeBoolean(this.isFavourite);
-//    }
-//
-//    @RequiresApi(api = Build.VERSION_CODES.Q)
-//    private void readFromParcel(Parcel in){
-//        this.fnbEstablishmentNameString = in.readString();
-//        this.waitingTimeString = in.readString();
-//        this.capacityString = in.readString();
-//        this.isOpenString = in.readString();
-//        this.isFavourite = in.readBoolean();
-//    }
-//
-//    @RequiresApi(api = Build.VERSION_CODES.Q)
-//    public FNBButton(Parcel in, Context context){
-//        super(context);
-//        readFromParcel(in);
-//    }
-//
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-//        Context context = this.context;
-//
-//        @RequiresApi(api = Build.VERSION_CODES.Q)
-//        public FNBButton createFromParcel(Parcel in){
-//            return new FNBButton(in, this.context);
-//        }
-//
-//        public FNBButton[] newArray(int size){
-//            return new FNBButton[size];
-//        }
-//    };
 }

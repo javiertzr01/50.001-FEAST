@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/fnbPhoto"
-        android:layout_width="166dp"
-        android:layout_height="201dp"
+        android:layout_width="167dp"
+        android:layout_height="176dp"
         android:layout_marginStart="244dp"
         android:background="@drawable/rounded_rectangle_shape"
         android:clickable="true"
@@ -32,46 +32,48 @@
         android:clickable="true"
         android:gravity="center"
         android:text="@string/test_fnbEstablishmentName"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dotText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:clickable="true"
         android:gravity="center"
         android:text="@string/dotText"
-        android:textColor="#83859C"
+        android:textColor= "@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/waitingTime"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549" />
+        app:layout_constraintVertical_bias="0.719" />
 
     <TextView
         android:id="@+id/waitingTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
         android:clickable="true"
         android:gravity="center"
         android:text="@string/test_waitingTime"
-        android:textColor="#83859C"
+        android:textColor= "@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/waitingTimePhoto"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549" />
+        app:layout_constraintVertical_bias="0.719" />
 
     <TextView
         android:id="@+id/capacity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"
         android:clickable="true"
         android:gravity="center"
         android:text="@string/test_capacity"
@@ -79,7 +81,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dotText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549" />
+        app:layout_constraintVertical_bias="0.719" />
 
     <TextView
         android:id="@+id/isOpen"
@@ -89,42 +91,13 @@
         android:clickable="true"
         android:gravity="center"
         android:text="@string/open"
-        android:textColor="#83859C"
+        android:textColor= "@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.021"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.741" />
-
-    <ImageView
-        android:id="@+id/historicalTrendPhoto"
-        android:layout_width="29dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:clickable="true"
-        android:contentDescription="An icon depicting a timeline"
-        android:gravity="center"
-        android:src="@drawable/historical_trends"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.909" />
-
-    <TextView
-        android:id="@+id/historyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:clickable="true"
-        android:gravity="center"
-        android:text="@string/historyText"
-        android:textColor="#83859C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/historicalTrendPhoto"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.906" />
+        app:layout_constraintVertical_bias="0.898" />
 
     <ImageView
         android:id="@+id/waitingTimePhoto"
@@ -138,21 +111,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551" />
+        app:layout_constraintVertical_bias="0.726" />
 
     <Button
         android:id="@+id/favouriteIndicator"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:background="#FFFFFF"
+        android:background="@color/white"
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136" />
-
+        app:layout_constraintVertical_bias="0.155" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
