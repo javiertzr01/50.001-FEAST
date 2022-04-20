@@ -1,7 +1,6 @@
 package com.example.feast;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +14,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 public class FNBButton extends ConstraintLayout{
     // all the variable data fields/images will be here as attributes of the FNBButton class
     private TextView fnbEstablishmentName; // for the name of the F&B establishment (e.g. Canteen)
-    private String fnbEstablishmentNameString; // for the Parcelable
     private TextView waitingTime; // for the estimated waiting time at the F&B establishment given current crowd levels
-    private String waitingTimeString; // for the Parcelable
     private TextView capacity; // for the current capacity of the F&B establishment, consisting of a word description and a percentage (e.g. Full 100%)
-    private String capacityString; // for the Parcelable
     private TextView isOpen; // to indicate whether the F&B establishment is currently open or closed
-    private String isOpenString; // for the Parcelable
     private ImageView fnbPhoto; // for a picture of the F&B establishment, to grab the image from the database or from some website? Backend team to clarify
     private TextView dotText; // constant
     private ImageView waitingTimePhoto; // constant
@@ -33,7 +28,7 @@ public class FNBButton extends ConstraintLayout{
     public FNBButton(Context context){ // constructor for FNBButton class
         super(context);
         this.context = context;
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fnb_button, null); // custom layout.xml file for the FNBButton
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.fnb_button, null); // custom fnb_button.xml file for the FNBButton
         this.fnbEstablishmentName = view.findViewById(R.id.fnbEstablishmentName);
         this.waitingTime = view.findViewById(R.id.waitingTime);
         this.capacity = view.findViewById(R.id.capacity);
@@ -78,31 +73,14 @@ public class FNBButton extends ConstraintLayout{
         return fnbButton;
     }
 
-    public String getFnbEstablishmentNameString() {
-        return fnbEstablishmentNameString;
-    }
-
-    public String getWaitingTimeString() {
-        return waitingTimeString;
-    }
-
-    public String getCapacityString() {
-        return capacityString;
-    }
-
-    public String getIsOpenString() {
-        return isOpenString;
-    }
-
     public boolean getIsFavourite() {
         return isFavourite;
     }
 
     public void setFNBEstablishmentName(String name){
         this.fnbEstablishmentName.setText(name);
-        this.fnbEstablishmentNameString = name;
 
-        // this function will simultaneously set the FNBPhoto since it is dependant on the name of the FNB Establishment
+        // this function will simultaneously set the FNBPhoto since it is dependent on the name of the FNB Establishment
         switch(name){
             case "Canteen":
                 this.fnbPhoto.setImageResource(R.drawable.canteen);
@@ -128,7 +106,6 @@ public class FNBButton extends ConstraintLayout{
 
     public void setWaitingTime(String waitingTime){
         this.waitingTime.setText(waitingTime + " min");
-        this.waitingTimeString = waitingTime;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -151,16 +128,16 @@ public class FNBButton extends ConstraintLayout{
                 break;
         }
 
+        // to set the capacity in the format: Full 100%, etc., with the respective text colours
         String tempCapacity = crowdLevel;
         double rawCrowdPercentage = crowdPercentage * 100;
         int simplifiedCrowdPercentage = (int) rawCrowdPercentage;
         tempCapacity += " " + String.valueOf(simplifiedCrowdPercentage) + "%"; // sets the percentage of the crowd level
         this.capacity.setText(tempCapacity);
-        this.capacityString = tempCapacity;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void setIsOpen(String openStatus){
+    public void setIsOpen(String openStatus){ // sets the text colour for the open status of the restaurant
         if (openStatus.equals("Closed")){
             this.isOpen.setTextColor(getResources().getColor(R.color.red, null));
         }
@@ -170,7 +147,6 @@ public class FNBButton extends ConstraintLayout{
         }
 
         this.isOpen.setText(openStatus);
-        this.isOpenString = openStatus;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

@@ -64,10 +64,9 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         CreateEstablishments.setFavourites(favList);
         fnbList = CreateEstablishments.getList();
 
-
         // sort by
         Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
-        Collections.sort(fnbList, chosenComparator); // order fnb establishments based on isFavorite, then chosen sorting method
+        Collections.sort(fnbList, chosenComparator); // order fnb establishments based on isFavorite, then the chosen sorting method
 
         // creating fnbButton
         for (FNBEstablishment est : fnbList) {
@@ -87,9 +86,11 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             fnbButtonArrayList.add(fnbButton);
 
             // for the intent
-            if (est.name.equals("Canteen")) { // different intent for canteen button
+            if (est.name.equals("Canteen")) { // canteen button will go to CanteenPage
                 setGoToCanteenPage(fnbButton, est);
-            } else {
+            }
+
+            else { // all the other non-canteen buttons will go to OthersInfoPage
                 setGoToOthersInfoPage(fnbButton, est);
             }
         }
@@ -102,8 +103,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(int i = 0; i < fnbButtonArrayList.toArray().length; i++)
-                {
+                for(int i = 0; i < fnbButtonArrayList.toArray().length; i++) {
                     try {
                         FNBEstablishment fnb = fnbList.get(i);
                         FNBButton fnbButton = fnbButtonArrayList.get(i);
@@ -114,10 +114,8 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
                         fnbButton.setCapacity(fnb.crowdLevel.getCurrentCrowdLevelString(), fnb.crowdLevel.getCrowdPercentage());
                         fnbButton.setWaitingTime(String.valueOf(fnb.crowdLevel.getWaitingTime()));
                     }
-                    catch (NullPointerException e)
-                    {
 
-                    }
+                    catch (NullPointerException e) {}
                 }
             }
 
@@ -187,9 +185,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         super.onRestart();
     }
 
-    // a bunch of helper methods below
-
-    // TODO
+    // a bunch of helper methods below, for the intents
     // helper method to go to OthersInfoPage upon clicking the FNBButton
     public void setGoToOthersInfoPage(FNBButton fnbButton, FNBEstablishment est){
         fnbButton.getFnbEstablishmentName().setOnClickListener(new View.OnClickListener() {
@@ -249,13 +245,12 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         });
     }
 
-    // TODO
     public void goToOthersInfoPage(View view, FNBButton fnbButton, FNBEstablishment est) {
         Intent intent = new Intent(HomePage.this, OthersInfoPage.class);
-        intent.putExtra("fnbEstablishmentName", fnbButton.getFnbEstablishmentNameString());
-        intent.putExtra("waitingTime", fnbButton.getWaitingTimeString());
-        intent.putExtra("capacity", fnbButton.getCapacityString());
-        intent.putExtra("isOpen", fnbButton.getIsOpenString());
+        intent.putExtra("fnbEstablishmentName", fnbButton.getFnbEstablishmentName().getText().toString());
+        intent.putExtra("waitingTime", fnbButton.getWaitingTime().getText().toString());
+        intent.putExtra("capacity", fnbButton.getCapacity().getText().toString());
+        intent.putExtra("isOpen", fnbButton.getIsOpen().getText().toString());
         intent.putExtra("isFavourite", fnbButton.getIsFavourite());
         intent.putExtra("isHalal", est.getIsHalal());
         intent.putExtra("openHour", est.openHour);
@@ -265,11 +260,10 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         intent.putExtra("openSec", est.openSec);
         intent.putExtra("closeSec", est.closeSec);
         intent.putExtra("description", est.description);
-        // put the menu and prices into the intent
+        // TODO put the menu and prices into the intent
         startActivity(intent);
     }
 
-    // TODO
     // helper method to go to CanteenPage upon clicking the FNBButton
     public void setGoToCanteenPage(FNBButton fnbButton, FNBEstablishment est){
         fnbButton.getFnbEstablishmentName().setOnClickListener(new View.OnClickListener() {
@@ -329,12 +323,11 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         });
     }
 
-    // TODO
     public void goToCanteenPage(View view, FNBButton fnbButton, FNBEstablishment est) {
         Intent intent = new Intent(HomePage.this, CanteenPage.class);
-        intent.putExtra("waitingTime", fnbButton.getWaitingTimeString());
-        intent.putExtra("capacity", fnbButton.getCapacityString());
-        intent.putExtra("isOpen", fnbButton.getIsOpenString());
+        intent.putExtra("waitingTime", fnbButton.getWaitingTime().getText().toString());
+        intent.putExtra("capacity", fnbButton.getCapacity().getText().toString());
+        intent.putExtra("isOpen", fnbButton.getIsOpen().getText().toString());
         intent.putExtra("isFavourite", fnbButton.getIsFavourite());
         intent.putExtra("isHalal", est.getIsHalal());
         intent.putExtra("openHour", est.openHour);
@@ -344,7 +337,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         intent.putExtra("openSec", est.openSec);
         intent.putExtra("closeSec", est.closeSec);
         intent.putExtra("description", est.description);
-        // put the menu and prices into the intent
+        // TODO put the menu and prices into the intent
         startActivity(intent);
     }
 }
