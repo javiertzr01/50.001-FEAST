@@ -87,7 +87,7 @@ public class CanteenPage extends AppCompatActivity {
             capacityTextView.setTextColor(getResources().getColor(R.color.red, null));
         }
 
-        waitingTimeTextView.setText(waitingTime + " min");
+        waitingTimeTextView.setText(waitingTime);
         openHour_str.setText(openHour);
         openMin_str.setText(openMin);
         closeHour_str.setText(closeHour);
