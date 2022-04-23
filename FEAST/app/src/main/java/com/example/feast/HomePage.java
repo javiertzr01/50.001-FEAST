@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class HomePage extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class HomePage extends AppCompatActivity {
     LinearLayout linearlayout; // declaration of the LinearLayout of activity_home_page.xml
     List<FNBEstablishment> fnbList;
     private final String sharedPrefFile = "com.example.android.mainsharedprefs";
@@ -40,17 +40,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        // sets up the sorting selector dropdown (spinner) to be placed on the action bar/tool bar itself
-        getSupportActionBar().hide();
-        Spinner sorting_selector = findViewById(R.id.sorting_selector);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sorting_selector_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        sorting_selector.setAdapter(adapter);
-        sorting_selector.setOnItemSelectedListener(this);
-        // the method/code/logic to implement what happens when an item from the spinner is selected is below, onItemSelected
+        getSupportActionBar().hide(); // hides the action bar, to display the toolbar (in activity_home_page.xml instead)
 
         ArrayList<FNBButton> fnbButtonArrayList = new ArrayList<>();
         linearlayout = findViewById(R.id.homePageLayout); // initialises the LinearLayout into linearlayout
@@ -124,43 +114,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         });
     }
 
-    // TODO
-    // for the sorting selector drop down (spinner)
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
-        String sortingMethod = parent.getItemAtPosition(position).toString();
-
-        if (sortingMethod.equals("Sort by Favourites")){
-            Comparator<FNBEstablishment> chosenComparator = new IsFavoriteComparator();
-            Collections.sort(fnbList, chosenComparator);
-            // TODO
-            // Refresh the fnbButtons if current sorting method != "Sort by Favourites"
-        }
-
-        else if (sortingMethod.equals("Sort by Capacity")){
-            Comparator<FNBEstablishment> chosenComparator = new CrowdLevelComparator();
-            Collections.sort(fnbList, chosenComparator);
-            // TODO
-            // Refresh the fnbButtons if current sorting method != "Sort by Capacity"
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent){
-        // TODO
-        // probably need shared preference to see what was the last chosen sorting method from the previous time when the user was in the app
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -168,21 +121,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         preferenceEditor.clear();
         preferenceEditor.putStringSet("favourites",favList);
         preferenceEditor.apply();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
     }
 
     // a bunch of helper methods below, for the intents
