@@ -125,11 +125,7 @@ public class FNBEstablishment extends Location{
 
     }
 
-    //public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }
-
     public int getMaxCapacity() { return this.maxCapacity; }
-
-    //public void invIsFavorite(boolean isFavorite) { this.isFavorite = !this.isFavorite; }
 
     public void setIsFavorite(boolean favorite) {
         isFavorite = favorite;
