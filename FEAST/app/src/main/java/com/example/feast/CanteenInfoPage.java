@@ -109,7 +109,6 @@ public class CanteenInfoPage extends AppCompatActivity {
             canteenStallImage.setImageResource(R.drawable.drinks_and_snacks);
         }
 
-        // TODO
         String menu = intent.getStringExtra("menu");    //get intent
         TextView mInfoMenu = findViewById(R.id.infoMenu);   //Init menu
         mInfoMenu.setText(menu);

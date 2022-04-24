@@ -198,7 +198,6 @@ public class HomePage extends AppCompatActivity {
         intent.putExtra("openSec", est.openSec);
         intent.putExtra("closeSec", est.closeSec);
         intent.putExtra("description", est.description);
-        // TODO put the menu and prices into the intent
         startActivity(intent);
     }
 
@@ -275,7 +274,6 @@ public class HomePage extends AppCompatActivity {
         intent.putExtra("openSec", est.openSec);
         intent.putExtra("closeSec", est.closeSec);
         intent.putExtra("description", est.description);
-        // TODO put the menu and prices into the intent
         startActivity(intent);
     }
 }
