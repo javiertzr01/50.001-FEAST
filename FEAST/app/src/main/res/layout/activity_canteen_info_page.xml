@@ -242,7 +242,7 @@
             android:id="@+id/halalCertification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Non-Hahal"
+            android:text="Non-Halal"
             android:textColor="@color/grey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
