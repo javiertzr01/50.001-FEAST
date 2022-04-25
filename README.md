@@ -1,17 +1,17 @@
-# 50001-InfoSys1D - FEAST App
+# 50001-InfoSys1D - FEAST App by Team 1D
 This repo contains two source folders - FEAST and openCV
 - FEAST folder contains codebase and resources for the FEAST Android App.
 - openCV folder contains openCV crowd tracker implementation.
 
-## Contributors
+## Team 1D Contributors
 This project was made for 50.001 Information Systems & Programming 1D Project by Team1D Cohort 1
- - [Michael Chun](https://github.com/mckp0) 1005258 [Project Lead]
- - [Christopher Wah](https://github.com/skerbos) 1005033 [Backend & Firebase Lead]
- - [Pala Tej Deep](https://github.com/Tej-Deep) 1005282 [Backend and openCV Developer]
- - [Javier Teo](https://github.com/javiertzr01) 1005214 [Backend Developer]
- - [Lim Fuo En](https://github.com/Fe-56) 1005125 [Frontend Lead] 
- - [Tan Lay Lin](https://github.com/Lay-Lin) 1005474 [Frontend Developer]
- - [Kenny Ong Ker Chin](https://github.com/cannotknee) 1005290 [Frontend Developer]
+ - 1005258 [Michael Chun](https://github.com/mckp0) [Project Lead]
+ - 1005033 [Christopher Wah](https://github.com/skerbos) [Backend & Firebase Lead]
+ - 1005282 [Pala Tej Deep](https://github.com/Tej-Deep) [Backend and openCV Developer]
+ - 1005214 [Javier Teo](https://github.com/javiertzr01) [Backend Developer]
+ - 1005125 [Lim Fuo En](https://github.com/Fe-56) [Frontend Lead] 
+ - 1005474 [Tan Lay Lin](https://github.com/Lay-Lin) [Frontend Developer]
+ - 1005290 [Kenny Ong Ker Chin](https://github.com/cannotknee) [Frontend Developer]
 
 ## Problem Statement
 With large crowds and limited capacity being inconvenient for diners, how can we design an app to seamlessly allow diners to make informed decisions on where and when to eat?
